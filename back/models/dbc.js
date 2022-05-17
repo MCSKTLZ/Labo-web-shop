@@ -55,8 +55,16 @@ module.exports = {
             //le produit a une ou plusieurs category et inversement (many-to-many)
             dbConnector.Product.belongsToMany(dbConnector.Category, { through: "Category_Product" })
             dbConnector.Category.belongsToMany(dbConnector.Product, { through: "Category_Product" })
+
+            //Crée les roles 
+            if(!dbConnector.Role.findOne({where : {role : "user"}})) {
+                dbConnector.Role.create({role : "user"})
+                dbConnector.Role.create({role : "admin"})
+            }
+            
             //sync({force : true}) pour reinitiliser la db
             dbConnector.sequelize.sync()
+            
         }
     },
 

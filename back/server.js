@@ -20,8 +20,8 @@ app.use(function (req, res, next) {
 app.use(cors())
 
 
-// const usersRouter = require("./routers/users.router")
-// app.use("/users", usersRouter)
+const usersRouter = require("./routers/users-router")
+app.use("/users", usersRouter)
 
 // const rolesRouter = require("./routers/roles.router")
 // app.use("/roles", rolesRouter)
