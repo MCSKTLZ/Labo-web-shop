@@ -6,6 +6,7 @@ const productModel = require('./product-model')
 const roleModel = require ("./role-model")
 const addressModel = require ("./address-model")
 const categoryModel = require ("./category-model")
+const brandModel = require ("./brand-model")
 
 let dbConnector
 
@@ -27,22 +28,33 @@ module.exports = {
                 Order: orderModel(sequelize, DataTypes),
                 Product : productModel(sequelize, DataTypes),
                 Adress : addressModel(sequelize, DataTypes),
-                Category : categoryModel(sequelize, Datatypes)
+                Category : categoryModel(sequelize, DataTypes),
+                Brand : brandModel(sequelize, DataTypes)
             }
             //Le user peut avoir plusieurs commande et la commande n'a qu'un seul user (One-to-many)
             dbConnector.User.hasMany(dbConnector.Order, {onDelete: 'cascade', hooks: true})
             dbConnector.Order.belongsTo(dbConnector.User, {
             allowNull: false
             })
-            //Le user a 1 role et le role a plusieurs user
+            //Le user a 1 role et le role a plusieurs user (one-to-many)
             dbConnector.Role.hasMany(dbConnector.User)
             dbConnector.User.belongsTo(dbConnector.Role, {
-            allowNull: true
+            allowNull: false
             })
-            // La categorie peut avoir plusieurs post et le post peut avoir plusieurs categorie (Many-to-many)
+            //Le user a 1 adress et l'address a un seul user (one-to-one)
+            dbConnector.Adress.hasOne(dbConnector.User)
+            dbConnector.User.belongsTo(dbConnector.Adress)
+            // L'order peut avoir plusieurs produits et inversement  (Many-to-many)
             dbConnector.Order.belongsToMany(dbConnector.Product, { through: "Order_Product" })
             dbConnector.Product.belongsToMany(dbConnector.Order, { through: "Order_Product" })
-
+            // Le produit a une brand et la brand peut avoir plusieurs produits (one-to-many)
+            dbConnector.Brand.hasMany(dbConnector.Product)
+            dbConnector.Product.belongsTo(dbConnector.Brand, {
+                allowNull: false
+            })
+            //le produit a une ou plusieurs category et inversement (many-to-many)
+            dbConnector.Product.belongsToMany(dbConnector.Category, { through: "Category_Product" })
+            dbConnector.Category.belongsToMany(dbConnector.Product, { through: "Category_Product" })
             //sync({force : true}) pour reinitiliser la db
             dbConnector.sequelize.sync()
         }
