@@ -7,7 +7,7 @@ const usersController = require("../controllers/user-controller")
 
 // router.get("/",auth.verifytoken, usersController.getAll)
 // router.get("/:name",auth.verifytoken, usersController.getUserByName)
-// router.post("/", usersController.newUser)
+router.post("/signup", usersController.createUser)
 // router.post("/login", authController.signIn)
 // router.patch("/:name",auth.verifytoken, usersController.updateUser)
 // router.patch("/password/:name",auth.verifytoken, usersController.changePassword)

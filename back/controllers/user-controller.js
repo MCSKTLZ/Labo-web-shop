@@ -14,6 +14,21 @@ exports.createUser = async (req, res, next) => {
             return res.status(400).json({
                 message : "Can't create user : Email already exist"
             })
+        } else {
+            newUser = {
+                firstname : req.body.firstname.trim(),
+                lastname : req.body.lastname.trim(),
+                email : req.body.email.trim(),
+                password : bcrypt.hashSync(req.body.password.trim(), 10),
+                RoleId : 2
+            }
+            dbConnector.User.create(newUser)
+                .then((response) => {
+                    res.status(201).json({
+                        message : "User successfully created",
+                        result : response,
+                    })
+                })
         } 
     }
     catch (err) {
