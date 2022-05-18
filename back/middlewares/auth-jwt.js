@@ -18,3 +18,18 @@ exports.verifytoken = (req, res, next) => {
       next();
     });
   };
+
+  exports.isAdmin = (req, res, next) => {
+    dbConnector.User.findByPk(req.userID).then(user => {
+      user.getRole().then(role => {
+          if (role.role === "admin") {
+            next();
+            return;
+          }
+        res.status(403).send({
+          message: "Require Admin Role!"
+        });
+        return;
+      });
+    });
+  };
