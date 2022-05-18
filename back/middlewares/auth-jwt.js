@@ -41,7 +41,7 @@ exports.verifytoken = (req, res, next) => {
             return;
         }
         res.status(403).send({
-            message: "Not logged with rigth name"
+            message: "Unauthorized"
           });
           return;
       })
