@@ -36,3 +36,14 @@ exports.createUser = async (req, res, next) => {
         res.json(err)
     }
 }
+
+exports.getAllUser = (req, res, next) => {
+    dbConnector.User.findAll()
+    .then((data) => {
+        res.json(data)
+    })
+    .catch((err) => {
+        console.log(err);
+        res.json(err)
+    })
+}
