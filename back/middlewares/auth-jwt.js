@@ -33,3 +33,16 @@ exports.verifytoken = (req, res, next) => {
       });
     });
   };
+
+  exports.isHim = (req, res, next) => {
+      dbConnector.User.findByPk(req.userID).then(user => {
+        if(user.id == req.params.id) {
+            next();
+            return;
+        }
+        res.status(403).send({
+            message: "Not logged with rigth name"
+          });
+          return;
+      })
+  }

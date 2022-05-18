@@ -3,12 +3,10 @@ const userModel = (sequelize, DataTypes) => {
         lastname: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
         },
         firstname: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
         },
         email: {
             type: DataTypes.STRING,

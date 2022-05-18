@@ -40,10 +40,60 @@ exports.createUser = async (req, res, next) => {
 exports.getAllUser = (req, res, next) => {
     dbConnector.User.findAll()
     .then((data) => {
-        res.json(data)
+        res.status(200).json(data)
     })
     .catch((err) => {
         console.log(err);
         res.json(err)
     })
+}
+
+exports.getUserById = async (req, res, next) => {
+    try {
+        let user = await dbConnector.User.findOne({where : {id : req.params.id}})
+        let role = await user.getRole()
+        let order = await user.getOrders()
+        let address = await user.getAddress()
+        let newData = {firstname : user.firstname,
+                        lastname : user.lastname,
+                        email : user.email,
+                        createdAt : user.createdAt,
+                        updatedAt : user.updatedAt,
+                        role : role.role,
+                        orders : order.map(e => e.toJSON()),
+                        address : address
+                        }
+        res.status(200).json(newData)
+    } 
+    catch(err) {
+        res.json(err)
+    }
+}
+
+exports.updateUser = async (req, res, next) => {
+    try {
+        if(Object.keys(req.body).length === 0 ) {
+            return res.status(400).json({
+                message : `Content cannot be empty`
+            })
+        }
+        const user = await dbConnector.User.findOne({where : {id : req.params.id}})
+        if(user) {
+            if(req.body.password || req.body.address) {
+                return res.status(403).send({
+                    message : "Can't change password or address from this route"
+                })
+            } 
+            user.update(req.body)
+            res.status(200).json({
+                message : `User ${req.params.name} updated`
+            })
+        } else {
+            res.status(200).json({
+                message : `User ${req.params.name} not found`
+            })
+        }
+    } catch (err) {
+        res.json(err)
+    }
 }
