@@ -58,8 +58,8 @@ module.exports = {
 
             //Crée les roles 
             if(!dbConnector.Role.findOne({where : {role : "user"}})) {
-                dbConnector.Role.create({role : "user"})
-                dbConnector.Role.create({role : "admin"})
+                dbConnector.Role.create({id : 2 , role : "user"})
+                dbConnector.Role.create({id : 1 , role : "admin"})
             }
             
             //sync({force : true}) pour reinitiliser la db

@@ -97,3 +97,21 @@ exports.updateUser = async (req, res, next) => {
         res.json(err)
     }
 }
+
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const delUser = await dbConnector.User.destroy({where : {id : req.params.id}})
+        if(delUser) {
+            res.status(200).send({
+                message : `User with id : ${req.params.id} deleted`
+            })
+        } else {
+            res.status(404).send({
+                message : `No user with id : ${req.params.id} found`
+            })
+        }
+    }
+    catch (err) {
+        res.json(err)
+    }
+}
