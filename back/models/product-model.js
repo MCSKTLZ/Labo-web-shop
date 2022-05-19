@@ -11,7 +11,7 @@ const productModel = (sequelize, DataTypes) => {
             unique: true
         },
         price: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.DECIMAL,
             allowNull: false
         },
         status: {

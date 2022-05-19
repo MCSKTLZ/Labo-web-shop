@@ -23,6 +23,9 @@ app.use(cors())
 const usersRouter = require("./routers/users-router")
 app.use("/users", usersRouter)
 
+const adminRouter = require("./routers/admin-router")
+app.use("/admin", adminRouter)
+
 // const rolesRouter = require("./routers/roles.router")
 // app.use("/roles", rolesRouter)
 

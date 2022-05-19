@@ -5,10 +5,6 @@ const auth = require("../middlewares/auth-jwt")
 const authController = require("../middlewares/auth-controller")
 const password = require("../middlewares/change-password")
 
-//A mettre dans admin routes
-router.patch("/admin/update/:id",auth.verifytoken,auth.isAdmin, usersController.updateUser)
-router.delete("/admin/:id", auth.verifytoken, auth.isHim,  usersController.deleteUser)
-router.get("/",auth.verifytoken,auth.isAdmin, usersController.getAllUser)
 
 router.get("/:id",auth.verifytoken, auth.isHim, usersController.getUserById)
 router.post("/signup", usersController.createUser)

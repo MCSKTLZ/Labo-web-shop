@@ -9,7 +9,7 @@ const addressModel = (sequelize, DataTypes) => {
             allowNull: false,
         },
         zip: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         street : {
@@ -17,7 +17,7 @@ const addressModel = (sequelize, DataTypes) => {
             allowNull: false,
         },
         number: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         box: {
