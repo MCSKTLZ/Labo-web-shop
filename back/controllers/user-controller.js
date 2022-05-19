@@ -86,11 +86,11 @@ exports.updateUser = async (req, res, next) => {
             } 
             user.update(req.body)
             res.status(200).json({
-                message : `User ${req.params.name} updated`
+                message : `User ${req.params.id} updated`
             })
         } else {
             res.status(200).json({
-                message : `User ${req.params.name} not found`
+                message : `User ${req.params.id} not found`
             })
         }
     } catch (err) {
