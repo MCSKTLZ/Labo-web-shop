@@ -1,6 +1,6 @@
 const dbConnector = require("../models/dbc").get()
 
-exports.createAddress = async (req, res, next) => {
+exports.createAndUpdateAddress = async (req, res, next) => {
     try {
         const user = await dbConnector.User.findByPk(req.params.id)
         let data = {
@@ -12,15 +12,18 @@ exports.createAddress = async (req, res, next) => {
             box : req.body.box
         }
         if (user.AddressId != null) {
-            return res.status(400).json({
-                message : "User Have already registered address"
+            const address = await dbConnector.Address.findByPk(user.AddressId)
+            address.update(data)
+            res.status(200).json({
+                message : `Address updated for ${user.email} `
             })
-        }
-        const address = await dbConnector.Address.create(data)
+        } else {
+            const address = await dbConnector.Address.create(data)
             user.update({AddressId : address.id})
             res.status(200).json({
             message : `Address added for ${user.email} `
             })
+        }
     }
     catch (err) {
         res.json(err)
