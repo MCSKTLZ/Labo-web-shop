@@ -27,7 +27,7 @@ module.exports = {
                 Role : roleModel(sequelize, DataTypes),
                 Order: orderModel(sequelize, DataTypes),
                 Product : productModel(sequelize, DataTypes),
-                Adress : addressModel(sequelize, DataTypes),
+                Address : addressModel(sequelize, DataTypes),
                 Category : categoryModel(sequelize, DataTypes),
                 Brand : brandModel(sequelize, DataTypes)
             }
@@ -42,8 +42,8 @@ module.exports = {
             allowNull: false
             })
             //Le user a 1 adress et l'address a un seul user (one-to-one)
-            dbConnector.Adress.hasOne(dbConnector.User)
-            dbConnector.User.belongsTo(dbConnector.Adress)
+            dbConnector.Address.hasOne(dbConnector.User)
+            dbConnector.User.belongsTo(dbConnector.Address)
             // L'order peut avoir plusieurs produits et inversement  (Many-to-many)
             dbConnector.Order.belongsToMany(dbConnector.Product, { through: "Order_Product" })
             dbConnector.Product.belongsToMany(dbConnector.Order, { through: "Order_Product" })
