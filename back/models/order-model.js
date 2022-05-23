@@ -1,7 +1,7 @@
 const orderModel = (sequelize, DataTypes) => {
     const Order = sequelize.define("Order", {
         totalPrice: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.FLOAT(10,2),
             allowNull: false
         }
     })
