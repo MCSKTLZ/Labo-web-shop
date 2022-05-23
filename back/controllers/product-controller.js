@@ -51,3 +51,17 @@ exports.deleteProduct = async (req, res, next) => {
         res.json({ message : err.errors})
     }
 }
+
+exports.getAllProduct = async (req, res, next) => {
+    try {
+        const products = await dbConnector.Product.findAll({
+            include: [{
+                model : Brand
+            }]
+        })
+        res.status(200).json(products)
+    }
+    catch(err) {
+        res.json({ message : err.errors})
+    }
+}
