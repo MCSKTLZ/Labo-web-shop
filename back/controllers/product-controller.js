@@ -70,3 +70,18 @@ exports.getAllProduct = async (req, res, next) => {
         res.json({ message : err.errors})
     }
 }
+
+exports.updateProduct = async (req, res, next) => {
+    try {
+        const product = await dbConnector.Product.findByPk(req.params.id)
+        product.update(req.body)
+        res.status(200).json({
+            message : `Product name ${product.name} updated`
+        })
+    }
+    catch(err) {
+        res.json({ message : err.errors})
+    }
+}
+
+//get prodduct by id

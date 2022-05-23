@@ -12,6 +12,7 @@ router.delete("/delete/:id", auth.verifytoken, auth.isAdmin,  usersController.de
 router.get("/",auth.verifytoken,auth.isAdmin, usersController.getAllUser)
 router.post("/product/new", auth.verifytoken, auth.isAdmin, productController.createProduct)
 router.delete("/product/delete/:id", auth.verifytoken, auth.isAdmin, productController.deleteProduct)
+router.patch("/product/update/:id", auth.verifytoken, auth.isAdmin, productController.updateProduct )
 router.post("/brand/new", auth.verifytoken, auth.isAdmin, brandContoller.createBrand)
 
 
