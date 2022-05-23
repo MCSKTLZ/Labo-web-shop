@@ -8,7 +8,7 @@ const productModel = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: false
         },
         price: {
             type: DataTypes.DECIMAL,
