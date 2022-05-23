@@ -9,11 +9,45 @@ exports.createProduct = async (req, res, next) => {
             message : "product already exist"
             })
         }
+        if(req.body.brand) {
+            const brand = await dbConnector.Brand.findOne({where : { name : req.body.brand}})
+            if(brand) {
+                const newProduct = await dbConnector.Product.create(req.body)
+                newProduct.BrandId = brand.id
+                newProduct.save()
+                return res.status(201).json({
+                    message : req.body.name + " created"
+                    })
+            } else {
+                const brand = await dbConnector.Brand.create({name : req.body.brand})
+                const newProduct = await dbConnector.Product.create(req.body)
+                newProduct.BrandId = brand.id
+                newProduct.save()
+                return res.status(201).json({
+                    message : req.body.name + " created"
+                    })
+            }
+        }
         const newProduct = await dbConnector.Product.create(req.body)
         res.status(201).json({
             message : req.body.name + " created"
         })
     } catch (err) {
+        res.json({ message : err.errors})
+    }
+}
+
+exports.deleteProduct = async (req, res, next) => {
+    try {
+        const product = await dbConnector.Product.findByPk(req.params.id)
+        if(product) {
+            product.destroy()
+            return res.status(200).json({
+                message : `Product id : ${req.params.id} deleted`
+                })
+        }
+    }
+    catch(err) {
         res.json({ message : err.errors})
     }
 }

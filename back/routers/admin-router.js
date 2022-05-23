@@ -11,6 +11,7 @@ router.patch("/update-role/:id",auth.verifytoken,auth.isAdmin, rolesController.c
 router.delete("/delete/:id", auth.verifytoken, auth.isAdmin,  usersController.deleteUser)
 router.get("/",auth.verifytoken,auth.isAdmin, usersController.getAllUser)
 router.post("/product/new", auth.verifytoken, auth.isAdmin, productController.createProduct)
+router.delete("/product/delete/:id", auth.verifytoken, auth.isAdmin, productController.deleteProduct)
 router.post("/brand/new", auth.verifytoken, auth.isAdmin, brandContoller.createBrand)
 
 
