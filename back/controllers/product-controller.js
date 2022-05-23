@@ -57,11 +57,11 @@ exports.getAllProduct = async (req, res, next) => {
         const products = await dbConnector.Product.findAll({
             include: [{
                 model: dbConnector.Brand,
-                attributes: { exclude: ["creaytedAt", "updatedAt"] }
+                attributes: { exclude: ["createdAt", "updatedAt"] }
             },
             {
                 model : dbConnector.Category,
-                attributes: { exclude: ["creaytedAt", "updatedAt"] }
+                attributes: { exclude: ["createdAt", "updatedAt"] }
             }],
         })
         res.status(200).json(products)

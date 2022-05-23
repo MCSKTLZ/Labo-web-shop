@@ -4,6 +4,7 @@ const usersController = require("../controllers/user-controller")
 const rolesController = require("../controllers/role-controller")
 const productController = require("../controllers/product-controller")
 const brandContoller = require("../controllers/brand-controller")
+const categoryController = require("../controllers/category-controller")
 const auth = require("../middlewares/auth-jwt")
 
 //All admin permission routes
@@ -21,6 +22,10 @@ router.patch("/product/update/:id", auth.verifytoken, auth.isAdmin, productContr
 
 // Brand routes
 router.post("/brand/new", auth.verifytoken, auth.isAdmin, brandContoller.createBrand)
+
+//Category routes
+router.post("/category/new", auth.verifytoken, auth.isAdmin, categoryController.createCategory)
+router.delete("/category/delete/:id", auth.verifytoken, auth.isAdmin, categoryController.deleteCategory)
 
 
 module.exports = router
