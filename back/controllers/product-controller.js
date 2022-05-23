@@ -84,4 +84,21 @@ exports.updateProduct = async (req, res, next) => {
     }
 }
 
-//get prodduct by id
+exports.getProductById = async (req, res, next) => {
+    try {
+        const product = await dbConnector.Product.findByPk(req.params.id, {
+            include: [{
+                model: dbConnector.Brand,
+                attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+                model: dbConnector.Category,
+                attributes: { exclude: ["createdAt", "updatedAt"] }
+            }]
+            })
+        res.status(200).json(product)
+    }
+    catch(err) {
+        res.json({ message : err.errors})
+    }
+} 
