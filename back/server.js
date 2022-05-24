@@ -27,7 +27,7 @@ const adminRouter = require("./routers/admin-router")
 app.use("/admin", adminRouter)
 
 const allRouter = require("./routers/all-router")
-app.use("/products", allRouter)
+app.use("/all", allRouter)
 
 // const rolesRouter = require("./routers/roles.router")
 // app.use("/roles", rolesRouter)

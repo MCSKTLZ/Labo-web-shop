@@ -27,9 +27,7 @@ exports.deleteCategory = async (req, res, next) => {
 
 exports.getAllCategory = async (req, res, next) => {
     try {
-        console.log("onpasse ma");
         const categories = await dbConnector.Category.findAll()
-        console.log(categories);
         res.status(200).json(categories)
     }
     catch(err) {
