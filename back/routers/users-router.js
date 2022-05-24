@@ -5,6 +5,7 @@ const addressController = require("../controllers/address-controller")
 const auth = require("../middlewares/auth-jwt")
 const authController = require("../middlewares/auth-controller")
 const password = require("../middlewares/change-password")
+const cartController = require("../controllers/cart-controller")
 
 //All users permission routes
 
@@ -17,6 +18,8 @@ router.post("/address/:id", auth.verifytoken, auth.isHim, addressController.crea
 router.patch("/update/:id",auth.verifytoken,auth.isHim, usersController.updateUser)
 router.patch("/password/:id",auth.verifytoken, auth.isHim, password.changePassById)
 router.delete("/:id", auth.verifytoken, auth.isHim, usersController.deleteUser)
+//cart routes
+router.post("/cart/product", auth.verifytoken, cartController.addToCart)
 
 
 module.exports = router

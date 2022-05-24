@@ -26,6 +26,6 @@ exports.createAndUpdateAddress = async (req, res, next) => {
         }
     }
     catch (err) {
-        res.json(err)
+        res.json({ message : err.errors})
     }
 }
