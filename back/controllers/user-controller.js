@@ -22,12 +22,10 @@ exports.createUser = async (req, res, next) => {
                 password : bcrypt.hashSync(req.body.password.trim(), 10),
                 RoleId : 2
             }
-            dbConnector.User.create(newUser)
-                .then((response) => {
-                    res.status(201).json({
-                        message : "User successfully created",
-                        result : response,
-                    })
+            const user = await dbConnector.User.create(newUser)
+            dbConnector.Cart.create({totalPrice : 0, status : "pending", UserId : user.id})
+            res.status(201).json({
+                message : `User ${user.email} created`,
                 })
         } 
     }
@@ -50,20 +48,27 @@ exports.getAllUser = (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
     try {
-        let user = await dbConnector.User.findOne({where : {id : req.params.id}})
-        let role = await user.getRole()
-        let order = await user.getOrders()
-        let address = await user.getAddress()
-        let newData = {firstname : user.firstname,
-                        lastname : user.lastname,
-                        email : user.email,
-                        createdAt : user.createdAt,
-                        updatedAt : user.updatedAt,
-                        role : role.role,
-                        orders : order.map(e => e.toJSON()),
-                        address : address
-                        }
-        res.status(200).json(newData)
+        let user = await dbConnector.User.findOne({
+            where : {id : req.params.id},
+            attributes : {exclude : ["password"]},
+            include: [{
+                model: dbConnector.Role,
+                attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+                model : dbConnector.Order,
+                attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+                model : dbConnector.Address,
+                attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+                model : dbConnector.Cart
+            }
+        ],
+        })
+        res.status(200).json(user)
     } 
     catch(err) {
         res.json(err)
