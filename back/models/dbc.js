@@ -7,6 +7,9 @@ const roleModel = require ("./role-model")
 const addressModel = require ("./address-model")
 const categoryModel = require ("./category-model")
 const brandModel = require ("./brand-model")
+const order_productModel = require ("./MTM-order_product")
+const cartModel = require ("./cart-model")
+const cart_productModel = require("./MTM-cart_product")
 
 let dbConnector
 
@@ -29,7 +32,10 @@ module.exports = {
                 Product : productModel(sequelize, DataTypes),
                 Address : addressModel(sequelize, DataTypes),
                 Category : categoryModel(sequelize, DataTypes),
-                Brand : brandModel(sequelize, DataTypes)
+                Brand : brandModel(sequelize, DataTypes),
+                Cart : cartModel(sequelize, DataTypes),
+                Order_Product : order_productModel(sequelize, DataTypes),
+                Cart_Poduct : cart_productModel(sequelize, DataTypes)
             }
             //Le user peut avoir plusieurs commande et la commande n'a qu'un seul user (One-to-many)
             dbConnector.User.hasMany(dbConnector.Order, {onDelete: 'cascade', hooks: true})
@@ -45,8 +51,14 @@ module.exports = {
             dbConnector.Address.hasOne(dbConnector.User)
             dbConnector.User.belongsTo(dbConnector.Address)
             // L'order peut avoir plusieurs produits et inversement  (Many-to-many)
-            dbConnector.Order.belongsToMany(dbConnector.Product, { through: "Order_Product" })
-            dbConnector.Product.belongsToMany(dbConnector.Order, { through: "Order_Product" })
+            dbConnector.Order.belongsToMany(dbConnector.Product, { through: dbConnector.Order_Product})
+            dbConnector.Product.belongsToMany(dbConnector.Order, { through: dbConnector.Order_Product})
+            // le cart a plusieurs produits et le produit a plusieurs cart
+            dbConnector.Cart.belongsToMany(dbConnector.Product, { through: dbConnector.Cart_Poduct})
+            dbConnector.Product.belongsToMany(dbConnector.Cart, { through: dbConnector.Cart_Poduct})
+            // le cart a un user et l'user a un seul cart
+            dbConnector.User.hasOne(dbConnector.Cart)
+            dbConnector.Cart.belongsTo(dbConnector.User)
             // Le produit a une brand et la brand peut avoir plusieurs produits (one-to-many)
             dbConnector.Brand.hasMany(dbConnector.Product)
             dbConnector.Product.belongsTo(dbConnector.Brand, {
