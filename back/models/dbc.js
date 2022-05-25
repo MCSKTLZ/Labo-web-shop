@@ -35,7 +35,7 @@ module.exports = {
                 Brand : brandModel(sequelize, DataTypes),
                 Cart : cartModel(sequelize, DataTypes),
                 Order_Product : order_productModel(sequelize, DataTypes),
-                Cart_Poduct : cart_productModel(sequelize, DataTypes)
+                Cart_Product : cart_productModel(sequelize, DataTypes)
             }
             //Le user peut avoir plusieurs commande et la commande n'a qu'un seul user (One-to-many)
             dbConnector.User.hasMany(dbConnector.Order, {onDelete: 'cascade', hooks: true})
@@ -54,8 +54,8 @@ module.exports = {
             dbConnector.Order.belongsToMany(dbConnector.Product, { through: dbConnector.Order_Product})
             dbConnector.Product.belongsToMany(dbConnector.Order, { through: dbConnector.Order_Product})
             // le cart a plusieurs produits et le produit a plusieurs cart
-            dbConnector.Cart.belongsToMany(dbConnector.Product, { through: dbConnector.Cart_Poduct})
-            dbConnector.Product.belongsToMany(dbConnector.Cart, { through: dbConnector.Cart_Poduct})
+            dbConnector.Cart.belongsToMany(dbConnector.Product, { through: dbConnector.Cart_Product})
+            dbConnector.Product.belongsToMany(dbConnector.Cart, { through: dbConnector.Cart_Product})
             // le cart a un user et l'user a un seul cart
             dbConnector.User.hasOne(dbConnector.Cart)
             dbConnector.Cart.belongsTo(dbConnector.User)

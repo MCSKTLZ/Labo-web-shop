@@ -20,21 +20,27 @@ exports.verifytoken = (req, res, next) => {
   };
 
   exports.isAdmin = (req, res, next) => {
-    dbConnector.User.findByPk(req.userID).then(user => {
-      user.getRole().then(role => {
-          if (role.role === "admin") {
-            next();
-            return;
-          }
-        res.status(403).send({
-          message: "Require Admin Role!"
+    try {
+      dbConnector.User.findByPk(req.userID).then(user => {
+        user.getRole().then(role => {
+            if (role.role === "admin") {
+              next();
+              return;
+            }
+          res.status(403).send({
+            message: "Require Admin Role!"
+          });
+          return;
         });
-        return;
       });
-    });
+    }
+    catch (err) {
+      res.json({ message : err.errors})
+    }
   };
 
   exports.isHim = (req, res, next) => {
+    try {
       dbConnector.User.findByPk(req.userID).then(user => {
         if(user.id == req.params.id) {
             next();
@@ -45,4 +51,8 @@ exports.verifytoken = (req, res, next) => {
           });
           return;
       })
+    }
+    catch (err) {
+      res.json({ message : err.errors})
+    }
   }

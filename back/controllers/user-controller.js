@@ -30,8 +30,7 @@ exports.createUser = async (req, res, next) => {
         } 
     }
     catch (err) {
-        console.log(err);
-        res.json(err)
+        res.json({ message : err.errors})
     }
 }
 
@@ -65,13 +64,12 @@ exports.getUserById = async (req, res, next) => {
             },
             {
                 model : dbConnector.Cart
-            }
-        ],
+            }],
         })
         res.status(200).json(user)
     } 
     catch(err) {
-        res.json(err)
+        res.json({ message : err.errors})
     }
 }
 
@@ -99,7 +97,7 @@ exports.updateUser = async (req, res, next) => {
             })
         }
     } catch (err) {
-        res.json(err)
+        res.json({ message : err.errors})
     }
 }
 
@@ -117,6 +115,6 @@ exports.deleteUser = async (req, res, next) => {
         }
     }
     catch (err) {
-        res.json(err)
+        res.json({ message : err.errors})
     }
 }

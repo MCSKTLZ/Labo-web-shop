@@ -5,9 +5,18 @@ exports.addToCart = async (req, res, next) => {
         const cart = await dbConnector.Cart.findOne({where : { UserId : req.userID}})
         const product = await dbConnector.Product.findByPk(req.body.productId)
         const price =  product.price*((100 - product.promo) / 100)
-        console.log(cart.totalPrice)
         const totalPrice = price + cart.totalPrice
-        console.log(totalPrice);
+        const cartProduct = await cart.getProducts({joinTableAttributes: []});
+        for(i of cartProduct) {
+            if(i.id == product.id) {
+                const cart_product = await dbConnector.Cart_Product.findOne({where : {CartId : cart.id , ProductId : product.id}})
+                await cart.update({totalPrice : totalPrice})
+                await cart_product.increment('quantity' , { by : 1 })
+                return res.status(200).json({
+                    message : `+ 1 ${product.name} added to the cart`
+                    })
+            }
+        }
         await cart.update({totalPrice : totalPrice})
         await product.addCart(cart, { through: { quantity: +1 } })
         res.status(200).json({
@@ -18,4 +27,15 @@ exports.addToCart = async (req, res, next) => {
         res.json({ message : err.errors})
     }
 
+}
+
+exports.removeFromCart = async (req, res, next) => {
+    try {
+        const cart = await dbConnector.Cart.findOne({where : { UserId : req.userID}})
+        const product = await dbConnector.Product.findByPk(req.body.productId)
+
+    }
+    catch(err) {
+        res.json({ message : err.errors})
+    }
 }
