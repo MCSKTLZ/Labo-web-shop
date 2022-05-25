@@ -14,6 +14,10 @@ const productModel = (sequelize, DataTypes) => {
             type: DataTypes.FLOAT(10,2),
             allowNull: false
         },
+        stock : {
+            type : DataTypes.INTEGER,
+            allowNull: false
+        },
         status: {
             type: DataTypes.ENUM('live', 'outOfStock', 'deleted'),
             allowNull: false
@@ -21,6 +25,10 @@ const productModel = (sequelize, DataTypes) => {
         promo : {
             type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        stock : {
+            type : DataTypes.INTEGER,
+            allowNull: false
         }
     })
 

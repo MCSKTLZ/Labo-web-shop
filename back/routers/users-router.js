@@ -20,6 +20,7 @@ router.patch("/password/:id",auth.verifytoken, auth.isHim, password.changePassBy
 router.delete("/:id", auth.verifytoken, auth.isHim, usersController.deleteUser)
 //cart routes
 router.post("/cart/product", auth.verifytoken, cartController.addToCart)
+router.patch("/cart/product", auth.verifytoken, cartController.removeFromCart)
 
 
 module.exports = router

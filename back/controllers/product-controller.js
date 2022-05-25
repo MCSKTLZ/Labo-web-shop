@@ -64,6 +64,11 @@ exports.getAllProduct = async (req, res, next) => {
                 attributes: { exclude: ["createdAt", "updatedAt"] }
             }],
         })
+        for (i of products) {
+            if(i.stock <= 0) {
+                i.update({status : "outOfStock"})
+            }
+        }
         res.status(200).json(products)
     }
     catch(err) {
