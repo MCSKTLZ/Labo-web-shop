@@ -9,11 +9,23 @@ exports.addToCart = async (req, res, next) => {
     const price = product.price * ((100 - product.promo) / 100);
     const totalPrice = price + cart.totalPrice;
     const cartProduct = await cart.getProducts({ joinTableAttributes: [] });
+    const cart_product = await dbConnector.Cart_Product.findOne({
+      where: { CartId: cart.id, ProductId: product.id },
+    });
+    if (cart_product) {
+      if (product.stock === 0 || product.stock <= cart_product.quantity) {
+        return res.status(200).json({
+          message: "no product in stock",
+        });
+      }
+    }
+    if (!cart_product && product.stock <= 0) {
+      return res.status(200).json({
+        message: "no product in stock",
+      });
+    }
     for (i of cartProduct) {
       if (i.id == product.id) {
-        const cart_product = await dbConnector.Cart_Product.findOne({
-          where: { CartId: cart.id, ProductId: product.id },
-        });
         await cart.update({ totalPrice: totalPrice });
         await cart_product.increment("quantity", { by: 1 });
         return res.status(200).json({

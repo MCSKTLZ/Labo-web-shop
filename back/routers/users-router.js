@@ -6,6 +6,7 @@ const auth = require("../middlewares/auth-jwt");
 const authController = require("../middlewares/auth-controller");
 const password = require("../middlewares/change-password");
 const cartController = require("../controllers/cart-controller");
+const orderController = require("../controllers/order-controller");
 
 //All users permission routes
 
@@ -37,5 +38,7 @@ router.delete("/:id", auth.verifytoken, auth.isHim, usersController.deleteUser);
 router.post("/cart/product", auth.verifytoken, cartController.addToCart);
 router.patch("/cart/product", auth.verifytoken, cartController.removeFromCart);
 router.get("/cart/all", auth.verifytoken, cartController.getAllCart);
+//order routes
+router.post("/order/get", auth.verifytoken, orderController.createOrder);
 
 module.exports = router;

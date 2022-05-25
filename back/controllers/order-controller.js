@@ -1,5 +1,9 @@
-const dbConnector = require("../models/dbc").get()
+const dbConnector = require("../models/dbc").get();
 
 exports.createOrder = async (req, res, next) => {
-    let newOrder = dsfs
-}
+  const cart = await dbConnector.Cart.findOne({
+    where: { UserId: req.userID },
+    include: { all: true },
+  });
+  res.json(cart);
+};
