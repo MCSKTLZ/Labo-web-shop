@@ -56,7 +56,7 @@ exports.removeFromCart = async (req, res, next) => {
       });
     }
     res.status(200).json({
-      message: `- 1 ${product.name} to the cart`,
+      message: `- 1 ${product.name} to the carte`,
     });
   } catch (err) {
     res.json({ message: err.errors });
