@@ -62,3 +62,21 @@ exports.removeFromCart = async (req, res, next) => {
     res.json({ message: err.errors });
   }
 };
+
+exports.getAllCart = async (req, res, next) => {
+  try {
+    const cart = await dbConnector.Cart.findOne({
+      where: { UserId: req.userID },
+      include: [
+        {
+          model: dbConnector.Product,
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
+      ],
+    });
+
+    res.status(200).json({ cart });
+  } catch (err) {
+    res.json({ message: err.errors });
+  }
+};
