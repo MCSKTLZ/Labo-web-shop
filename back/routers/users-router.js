@@ -3,15 +3,9 @@ const router = express.Router();
 const usersController = require("../controllers/user-controller");
 const addressController = require("../controllers/address-controller");
 const auth = require("../middlewares/auth-jwt");
-const authController = require("../middlewares/auth-controller");
 const password = require("../middlewares/change-password");
 const cartController = require("../controllers/cart-controller");
 const orderController = require("../controllers/order-controller");
-
-//All users permission routes
-
-router.post("/signup", usersController.createUser);
-router.post("/login", authController.signIn);
 
 //Users routes
 router.get("/:id", auth.verifytoken, auth.isHim, usersController.getUserById);

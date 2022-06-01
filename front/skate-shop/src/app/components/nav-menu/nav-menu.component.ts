@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent implements OnInit {
 
-  constructor() { }
+  public isConnected: boolean = false;
+
+  constructor(private AuthService : AuthService, 
+              private Route: Router,
+              private ActivatedRoute : ActivatedRoute ) {
+               }
 
   ngOnInit(): void {
   }

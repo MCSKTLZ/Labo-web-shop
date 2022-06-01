@@ -22,30 +22,33 @@ export class AuthService {
 
   // Sign-up
   signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/users`;
+    let api = `${this.endpoint}/all/signup`;
     return this.http.post(api, user)
   }
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/users/login`, user)
+      .post<any>(`${this.endpoint}/all/login`, user)
       .subscribe((res: any) => {
         
         localStorage.setItem('access_token', res.accessToken);
-        localStorage.setItem('account_connected', res.username);
+        localStorage.setItem('account_connected', res.email);
         localStorage.setItem('account_role', res.role);
-        localStorage.setItem('account_id', res.id)
+        localStorage.setItem('account_id', res.id);
+        localStorage.setItem('account_name' , res.firstname + " " + res.lastname)
         
-        this.getUserProfile(res.username).subscribe((res) => {
+        // this.router.navigate(['/home'])
+
+        this.getUserProfile(res.id).subscribe((res) => {
           this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.pseudo]);
+          this.router.navigate(['user-profile/' + res.id]);
         });
       });
   }
   getToken() {
     return localStorage.getItem('access_token');
   }
-  get isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
@@ -59,8 +62,8 @@ export class AuthService {
     }
   }
   // User profile
-  getUserProfile(name: any): Observable<any> {
-    let api = `${this.endpoint}/users/${name}`;
+  getUserProfile(id: any): Observable<any> {
+    let api = `${this.endpoint}/users/${id}`;
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res) => {
         return res || {};
