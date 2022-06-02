@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,12 +10,12 @@ export class NavMenuComponent implements OnInit {
 
   public isConnected: boolean = false;
 
-  constructor(private AuthService : AuthService, 
-              private Route: Router,
-              private ActivatedRoute : ActivatedRoute ) {
-               }
+  constructor(private tokenStorage : TokenStorageService) {}
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.tokenStorage.signOut()
+  }
 }

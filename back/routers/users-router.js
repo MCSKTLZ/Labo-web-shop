@@ -29,10 +29,30 @@ router.patch(
 );
 router.delete("/:id", auth.verifytoken, auth.isHim, usersController.deleteUser);
 //cart routes
-router.post("/cart/product", auth.verifytoken, cartController.addToCart);
-router.patch("/cart/product", auth.verifytoken, cartController.removeFromCart);
-router.get("/cart/all", auth.verifytoken, cartController.getAllCart);
+router.post(
+  "/cart/product",
+  auth.verifytoken,
+  auth.isHim,
+  cartController.addToCart
+);
+router.patch(
+  "/cart/product",
+  auth.verifytoken,
+  auth.isHim,
+  cartController.removeFromCart
+);
+router.get(
+  "/cart/all",
+  auth.verifytoken,
+  auth.isHim,
+  cartController.getAllCart
+);
 //order routes
-router.post("/order/get", auth.verifytoken, orderController.createOrder);
+router.post(
+  "/order/get",
+  auth.verifytoken,
+  auth.isHim,
+  orderController.createOrder
+);
 
 module.exports = router;

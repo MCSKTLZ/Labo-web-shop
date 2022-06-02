@@ -44,7 +44,7 @@ exports.isAdmin = (req, res, next) => {
 exports.isHim = (req, res, next) => {
   try {
     dbConnector.User.findByPk(req.userID).then((user) => {
-      if (user.id == req.params.id) {
+      if (user.id == req.params.id || user.RoleId == 1) {
         next();
         return;
       }

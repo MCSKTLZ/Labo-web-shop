@@ -5,6 +5,7 @@
         <div class="card-body p-4">
           <!-- Default form login -->
           <form
+            *ngIf="!isLoggedIn"
             class="text-center border border-light p-5"
             [formGroup]="signinForm"
             (ngSubmit)="loginUser()"
@@ -45,6 +46,9 @@
               <a href="/signup">Register</a>
             </p>
           </form>
+          <div class="alert alert-success" *ngIf="isLoggedIn">
+            Logged in as {{ role }}.
+          </div>
           <!-- Default form login -->
         </div>
       </div>

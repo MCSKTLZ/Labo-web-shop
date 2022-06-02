@@ -45,9 +45,17 @@
             <a class="nav-link btn px-3 me-2" href="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link btn btn-primary px-3 me-3" href="/signup"
+            <a class="nav-link btn btn-primary px-3 me-2" href="/signup"
               >Signup</a
             >
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link btn btn-danger px-3 me-3"
+              (click)="logout()"
+            >
+              Logout
+            </button>
           </li>
         </ul>
         <a class="nav-link" href="/cart">
