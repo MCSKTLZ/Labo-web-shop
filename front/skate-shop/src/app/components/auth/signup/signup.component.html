@@ -3,7 +3,12 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body p-4">
-          <form class="text-center border border-light p-5" *ngIf="!isLoggedIn">
+          <form
+            class="text-center border border-light p-5"
+            *ngIf="!isLoggedIn"
+            [formGroup]="signupForm"
+            (ngSubmit)="register()"
+          >
             <p class="h4 mb-4">Sign up</p>
 
             <div class="row mb-4">
@@ -12,6 +17,7 @@
                 <input
                   type="text"
                   id="defaultRegisterFormFirstName"
+                  formControlName="firstname"
                   class="form-control"
                   placeholder="First name"
                 />
@@ -20,6 +26,7 @@
                 <!-- Last name -->
                 <input
                   type="text"
+                  formControlName="lastname"
                   id="defaultRegisterFormLastName"
                   class="form-control"
                   placeholder="Last name"
@@ -30,6 +37,7 @@
             <!-- E-mail -->
             <input
               type="email"
+              formControlName="email"
               id="defaultRegisterFormEmail"
               class="form-control mb-4"
               placeholder="E-mail"
@@ -38,6 +46,7 @@
             <!-- Password -->
             <input
               type="password"
+              formControlName="password"
               id="defaultRegisterFormPassword"
               class="form-control"
               placeholder="Password"
@@ -60,10 +69,13 @@
               By clicking <em>Sign up</em> you agree to our
               <a href="" target="_blank">terms of service</a>
             </p>
+            <div class="alert alert-danger text-center" *ngIf="isSignupFailed">
+              {{ errorMessage }}
+            </div>
+            <div class="alert alert-success text-center" *ngIf="isLoggedIn">
+              You are already logged
+            </div>
           </form>
-          <div class="alert alert-success text-center" *ngIf="isLoggedIn">
-            You are already logged
-          </div>
         </div>
       </div>
     </div>

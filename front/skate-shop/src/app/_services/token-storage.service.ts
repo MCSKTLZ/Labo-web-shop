@@ -63,4 +63,12 @@ export class TokenStorageService {
     return (this.currentUserValue != null);
   }
 
+  isAdmin() : boolean {
+    if(this.isConnected()){
+      if (this.currentUserValue.role === "admin") return true
+      else 
+        return false
+    }else 
+      return false
+  }
 }

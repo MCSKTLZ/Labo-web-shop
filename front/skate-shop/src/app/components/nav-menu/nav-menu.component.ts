@@ -10,11 +10,13 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class NavMenuComponent implements OnInit {
 
   public isConnected: boolean = false;
+  public isAdmin: boolean = false;
 
   constructor(private tokenStorage : TokenStorageService) {
     this.tokenStorage.currentUser.subscribe({
       next : (user) => {
         this.isConnected = this.tokenStorage.isConnected();
+        this.isAdmin = this.tokenStorage.isAdmin()
       }
   })
 }
