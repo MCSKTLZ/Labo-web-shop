@@ -16,8 +16,12 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   role!: string;
 
-  constructor(public fb: FormBuilder,
-    private authService: AuthService, private tokenStorage : TokenStorageService) {
+  constructor(public fb: FormBuilder, private tokenStorage : TokenStorageService) {
+      this.tokenStorage.currentUser.subscribe({
+        next : (user) => {
+          this.isLoggedIn = this.tokenStorage.isConnected();
+        }
+    })
       this.signinForm = this.fb.group({
         email: [''],
         password: [''],
@@ -31,8 +35,7 @@ export class LoginComponent implements OnInit {
     }
   }
   loginUser() {
-    console.log(this.signinForm.value);
-    this.authService.login(this.signinForm.value).subscribe(
+    this.tokenStorage.login(this.signinForm.value).subscribe(
       {
         next : (data) => this.storageLogin(data),
         error : (e) => this.handleError(e)
@@ -43,11 +46,8 @@ export class LoginComponent implements OnInit {
   }
   storageLogin(data : any) {
     this.tokenStorage.saveToken(data.accessToken)
-    this.tokenStorage.saveToken(data.accessToken)
-    this.tokenStorage.saveToken(data.accessToken)
     this.tokenStorage.saveUser(data);
     this.isLoginFailed = false;
-    this.isLoggedIn = true;
     this.role = this.tokenStorage.getUser().role;
     this.reloadPage();
   }

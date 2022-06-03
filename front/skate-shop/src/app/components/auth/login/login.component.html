@@ -34,7 +34,7 @@
             <!-- Sign in button -->
             <button
               mdbBtn
-              class="btn btn-block btn-primary my-4"
+              class="btn btn-block btn-info my-4"
               block="true"
               type="submit"
             >
@@ -46,7 +46,7 @@
               <a href="/signup">Register</a>
             </p>
           </form>
-          <div class="alert alert-success" *ngIf="isLoggedIn">
+          <div class="alert alert-success text-center" *ngIf="isLoggedIn">
             Logged in as {{ role }}.
           </div>
           <!-- Default form login -->
