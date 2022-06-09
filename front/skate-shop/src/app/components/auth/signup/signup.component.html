@@ -19,7 +19,7 @@
                   id="defaultRegisterFormFirstName"
                   formControlName="firstname"
                   class="form-control"
-                  placeholder="First name"
+                  placeholder="First name*"
                 />
               </div>
               <div class="col">
@@ -29,7 +29,7 @@
                   formControlName="lastname"
                   id="defaultRegisterFormLastName"
                   class="form-control"
-                  placeholder="Last name"
+                  placeholder="Last name*"
                 />
               </div>
             </div>
@@ -40,7 +40,7 @@
               formControlName="email"
               id="defaultRegisterFormEmail"
               class="form-control mb-4"
-              placeholder="E-mail"
+              placeholder="E-mail*"
             />
 
             <!-- Password -->
@@ -49,7 +49,7 @@
               formControlName="password"
               id="defaultRegisterFormPassword"
               class="form-control"
-              placeholder="Password"
+              placeholder="Password*"
               aria-describedby="defaultRegisterFormPasswordHelpBlock"
             />
             <small
@@ -60,7 +60,11 @@
             </small>
 
             <!-- Sign up button -->
-            <button class="btn btn-info my-4 btn-block" type="submit">
+            <button
+              class="btn btn-info my-4 btn-block"
+              type="submit"
+              [disabled]="!signupForm.valid"
+            >
               Sign up
             </button>
 

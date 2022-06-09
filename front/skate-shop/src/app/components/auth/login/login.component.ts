@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Router } from '@angular/router';
@@ -23,9 +23,15 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = this.tokenStorage.isConnected();
         }
     })
-      this.signinForm = this.fb.group({
-        email: [''],
-        password: [''],
+      this.signinForm = new FormGroup({
+        email : new FormControl ('', Validators.compose([
+          Validators.required,
+          Validators.email
+        ])),
+        password : new FormControl ('' , Validators.compose([
+          Validators.required,
+          Validators.minLength(4)
+        ]))
       });
      }
 

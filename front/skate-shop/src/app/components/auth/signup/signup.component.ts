@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Router } from '@angular/router';
@@ -22,11 +22,24 @@ export class SignupComponent implements OnInit {
         this.isLoggedIn = this.tokenStorage.isConnected();
       }
   })
-    this.signupForm = this.fb.group({
-      firstname : [''],
-      lastname : [''],
-      email: [''],
-      password: [''],
+    this.signupForm = new FormGroup({
+      firstname : new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.maxLength(20),
+      ])),
+      lastname : new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.maxLength(20),
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.email,
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(4)
+      ])),
     });
    }
 
