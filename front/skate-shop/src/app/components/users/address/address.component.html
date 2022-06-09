@@ -5,15 +5,15 @@
         <div class="card-header text-center">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                (click)="redirecToUserProfile()"
-                role="button"
+              <a class="nav-link" (click)="redirecToUserProfile()" role="button"
                 >User's infos</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="redirecToUserAddress()" role="button"
+              <a
+                class="nav-link active"
+                (click)="redirecToUserAddress()"
+                role="button"
                 >Address</a
               >
             </li>
@@ -23,12 +23,8 @@
           </ul>
         </div>
         <div class="card-body">
-          <h5 class="card-title mb-4">My account</h5>
-          <form
-            class="text-center border border-light"
-            [formGroup]="userForm"
-            (ngSubmit)="updateUser()"
-          >
+          <h5 class="card-title mb-4">User info</h5>
+          <form class="text-center border border-light" [formGroup]="userForm">
             <div class="row">
               <div class="col">
                 <label for="lastname">Last name</label>
@@ -77,13 +73,9 @@
               class="btn btn-block btn-info my-4"
               block="true"
               type="submit"
-              [disabled]="!userForm.valid"
             >
               Update infos
             </button>
-            <div class="alert alert-success text-center" *ngIf="updateSuccess">
-              User updated successfully !
-            </div>
           </form>
         </div>
       </div>

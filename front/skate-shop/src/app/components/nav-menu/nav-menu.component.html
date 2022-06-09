@@ -94,7 +94,11 @@
               aria-labelledby="loginDropdown"
               *ngIf="isConnected"
             >
-              <li><a class="dropdown-item" href="login">Account</a></li>
+              <li>
+                <a class="dropdown-item" (click)="redirectUserProfile()"
+                  >Account</a
+                >
+              </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
                 <a class="dropdown-item" href="" (click)="logout()">Logout</a>

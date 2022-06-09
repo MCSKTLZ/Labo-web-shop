@@ -8,15 +8,13 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-//mdb tools
-
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { UserProfileComponent } from './components/users/user-profile/user-profile.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AddressComponent } from './components/users/address/address.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +24,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     HomeComponent,
     SignupComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,

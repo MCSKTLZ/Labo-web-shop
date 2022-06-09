@@ -5,6 +5,7 @@ import { RegisterUser } from '../shared/models/registerUser';
 
 
 const AUTH_API = 'http://localhost:3000/all/';
+const USER_API = 'http://localhost:3000/users/'
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -20,4 +21,9 @@ export class AuthService {
   register(user : RegisterUser): Observable<any> {
     return this.http.post(AUTH_API + 'signup', user , httpOptions);
   }
+  
+  updateUser(user : any, id : number): Observable<any> {
+    return this.http.patch(USER_API + 'update/' + id, user, httpOptions)
+  }
+
 }

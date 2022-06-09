@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-import { AuthService } from 'src/app/_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -12,7 +12,7 @@ export class NavMenuComponent implements OnInit {
   public isConnected: boolean = false;
   public isAdmin: boolean = false;
 
-  constructor(private tokenStorage : TokenStorageService) {
+  constructor(private tokenStorage : TokenStorageService, public router : Router) {
     this.tokenStorage.currentUser.subscribe({
       next : (user) => {
         this.isConnected = this.tokenStorage.isConnected();
@@ -26,5 +26,8 @@ export class NavMenuComponent implements OnInit {
 
   logout() {
     this.tokenStorage.signOut()
+  }
+  redirectUserProfile() {
+    this.router.navigate(['user-profile/' + this.tokenStorage.getUser().id])
   }
 }
