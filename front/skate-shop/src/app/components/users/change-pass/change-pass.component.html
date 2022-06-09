@@ -1,1 +1,74 @@
-<p>change-pass works!</p>
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="card text-center">
+        <app-nav-user></app-nav-user>
+        <div class="card-body">
+          <h5 class="card-title mb-4">Change password</h5>
+          <form
+            class="text-center border border-light"
+            [formGroup]="passForm"
+            (ngSubmit)="(null)"
+          >
+            <div class="row">
+              <div class="col">
+                <label for="lastname">Last name*</label>
+                <input
+                  type="text"
+                  formControlName="lastname"
+                  class="form-control mb-4"
+                  placeholder="Lastname"
+                />
+              </div>
+              <div class="col">
+                <label for="firstname">First name*</label>
+                <input
+                  type="text"
+                  formControlName="firstname"
+                  class="form-control mb-4"
+                  placeholder="firstname"
+                />
+              </div>
+            </div>
+            <label for="email">Email*</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control mb-4"
+              placeholder="E-mail"
+            />
+            <div class="row">
+              <div class="col">
+                <label for="role">Role</label>
+                <input
+                  type="text"
+                  formControlName="role"
+                  class="form-control mb-4"
+                  placeholder="role"
+                />
+              </div>
+            </div>
+            <label for="createdAt">Account created at :</label>
+            <input
+              type="text"
+              formControlName="createdAt"
+              class="form-control mb-4"
+            />
+            <p class="text-start">*Required Fields</p>
+            <button
+              class="btn btn-block btn-info my-2"
+              block="true"
+              type="submit"
+              [disabled]="!passForm.valid"
+            >
+              Update infos
+            </button>
+            <!-- <div class="alert alert-success text-center" *ngIf="updateSuccess">
+                User updated successfully !
+              </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

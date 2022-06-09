@@ -5,6 +5,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddressComponent } from './components/users/address/address.component';
 import { UserProfileComponent } from './components/users/user-profile/user-profile.component';
+import { ChangePassComponent } from './components/users/change-pass/change-pass.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'signup', component : SignupComponent},
   { path: 'login', component : LoginComponent},
   { path: 'user-profile/:id', component: UserProfileComponent},
-  { path: 'user-profile/address/:id', component: AddressComponent}
+  { path: 'user-profile/address/:id', component: AddressComponent},
+  { path: 'user-profile/pass-change/:id', component: ChangePassComponent}
 ];
 
 @NgModule({

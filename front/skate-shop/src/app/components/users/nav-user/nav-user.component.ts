@@ -27,5 +27,8 @@ export class NavUserComponent implements OnInit {
   redirecToUserAddress(){
     this.router.navigate(['user-profile/address/' + this.currentUser.id])
   }
+  redirecToUserPassChange(){
+    this.router.navigate(['user-profile/pass-change/' + this.currentUser.id])
+  }
 
 }
