@@ -38,4 +38,8 @@ export class UserService {
   updateUserAddress(address : any, id : number): Observable<any> {
     return this.http.post(this.endpoint + "/users/address/" + id, address )
   }
+
+  changePass(password : any, id : number) : Observable<any> {
+    return this.http.patch(this.endpoint + "/users/password/" + id, password )
+  }
 }

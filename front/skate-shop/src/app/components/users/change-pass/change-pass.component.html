@@ -8,64 +8,43 @@
           <form
             class="text-center border border-light"
             [formGroup]="passForm"
-            (ngSubmit)="(null)"
+            (ngSubmit)="changePass()"
           >
-            <div class="row">
-              <div class="col">
-                <label for="lastname">Last name*</label>
-                <input
-                  type="text"
-                  formControlName="lastname"
-                  class="form-control mb-4"
-                  placeholder="Lastname"
-                />
-              </div>
-              <div class="col">
-                <label for="firstname">First name*</label>
-                <input
-                  type="text"
-                  formControlName="firstname"
-                  class="form-control mb-4"
-                  placeholder="firstname"
-                />
-              </div>
-            </div>
-            <label for="email">Email*</label>
             <input
-              type="email"
-              formControlName="email"
+              type="password"
+              formControlName="password"
               class="form-control mb-4"
-              placeholder="E-mail"
+              placeholder="Password"
             />
-            <div class="row">
-              <div class="col">
-                <label for="role">Role</label>
-                <input
-                  type="text"
-                  formControlName="role"
-                  class="form-control mb-4"
-                  placeholder="role"
-                />
-              </div>
-            </div>
-            <label for="createdAt">Account created at :</label>
             <input
-              type="text"
-              formControlName="createdAt"
+              type="password"
+              formControlName="newPassword"
               class="form-control mb-4"
+              placeholder="New password"
             />
-            <p class="text-start">*Required Fields</p>
+            <input
+              type="password"
+              formControlName="newPasswordRepeat"
+              class="form-control mb-2"
+              placeholder="Repeat new password"
+            />
+            <small
+              id="defaultRegisterFormPasswordHelpBlock"
+              class="form-text text-muted mb-10"
+            >
+              At least 8 characters and 1 digit
+            </small>
+            <div class="alert alert-danger text-center" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </div>
             <button
               class="btn btn-block btn-info my-2"
               block="true"
               type="submit"
               [disabled]="!passForm.valid"
             >
-              Update infos
+              Update password
             </button>
-            <!-- <div class="alert alert-success text-center" *ngIf="updateSuccess">
-                User updated successfully !
-              </div> -->
           </form>
         </div>
       </div>
