@@ -16,6 +16,7 @@ import { UserProfileComponent } from './components/users/user-profile/user-profi
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddressComponent } from './components/users/address/address.component';
 import { NavUserComponent } from './components/users/nav-user/nav-user.component';
+import { ChangePassComponent } from './components/users/change-pass/change-pass.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NavUserComponent } from './components/users/nav-user/nav-user.component
     LoginComponent,
     UserProfileComponent,
     AddressComponent,
-    NavUserComponent
+    NavUserComponent,
+    ChangePassComponent
   ],
   imports: [
     BrowserModule,
