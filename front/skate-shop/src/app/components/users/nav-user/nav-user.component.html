@@ -1,0 +1,27 @@
+<div class="card-header text-center">
+  <ul class="nav nav-pills card-header-pills">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="redirecToUserProfile()"
+        [routerLink]="['/user-profile', currentUser.id]"
+        routerLinkActive="active"
+        role="button"
+        >User's infos</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        (click)="redirecToUserAddress()"
+        [routerLink]="['/user-profile/address', currentUser.id]"
+        routerLinkActive="active"
+        role="button"
+        >Address</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled">Disabled</a>
+    </li>
+  </ul>
+</div>

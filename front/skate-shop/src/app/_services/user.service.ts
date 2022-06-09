@@ -35,4 +35,7 @@ export class UserService {
           })
         );
       }
+  updateUserAddress(address : any, id : number): Observable<any> {
+    return this.http.post(this.endpoint + "/users/address/" + id, address )
+  }
 }

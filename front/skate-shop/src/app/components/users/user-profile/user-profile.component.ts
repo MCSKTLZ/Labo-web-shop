@@ -34,6 +34,7 @@ export class UserProfileComponent implements OnInit {
     let date = new Date(this.currentUser.createdAt)
     let newDate = date.toLocaleDateString()
     
+    // update form with currentuser Value 
     this.userForm.patchValue({
       email : this.currentUser.email,
       firstname : this.currentUser.firstname,
@@ -75,13 +76,5 @@ export class UserProfileComponent implements OnInit {
 
   handleError(data: any ) {
     this.errorMessage = data.error.message;
-  }
-
-  // nav user
-  redirecToUserProfile(){
-    this.router.navigate(['user-profile/' + this.currentUser.id])
-  }
-  redirecToUserAddress(){
-    this.router.navigate(['user-profile/address/' + this.currentUser.id])
   }
 }

@@ -2,26 +2,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-7">
       <div class="card text-center">
-        <div class="card-header text-center">
-          <ul class="nav nav-pills card-header-pills">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                (click)="redirecToUserProfile()"
-                role="button"
-                >User's infos</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="redirecToUserAddress()" role="button"
-                >Address</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-        </div>
+        <app-nav-user></app-nav-user>
         <div class="card-body">
           <h5 class="card-title mb-4">My account</h5>
           <form
@@ -31,7 +12,7 @@
           >
             <div class="row">
               <div class="col">
-                <label for="lastname">Last name</label>
+                <label for="lastname">Last name*</label>
                 <input
                   type="text"
                   formControlName="lastname"
@@ -40,7 +21,7 @@
                 />
               </div>
               <div class="col">
-                <label for="firstname">First name</label>
+                <label for="firstname">First name*</label>
                 <input
                   type="text"
                   formControlName="firstname"
@@ -49,7 +30,7 @@
                 />
               </div>
             </div>
-            <label for="email">Email</label>
+            <label for="email">Email*</label>
             <input
               type="email"
               formControlName="email"
@@ -73,8 +54,9 @@
               formControlName="createdAt"
               class="form-control mb-4"
             />
+            <p class="text-start">*Required Fields</p>
             <button
-              class="btn btn-block btn-info my-4"
+              class="btn btn-block btn-info my-2"
               block="true"
               type="submit"
               [disabled]="!userForm.valid"

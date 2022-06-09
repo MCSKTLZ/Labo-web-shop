@@ -2,80 +2,84 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-7">
       <div class="card text-center">
-        <div class="card-header text-center">
-          <ul class="nav nav-pills card-header-pills">
-            <li class="nav-item">
-              <a class="nav-link" (click)="redirecToUserProfile()" role="button"
-                >User's infos</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                (click)="redirecToUserAddress()"
-                role="button"
-                >Address</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-        </div>
+        <app-nav-user></app-nav-user>
         <div class="card-body">
-          <h5 class="card-title mb-4">User info</h5>
-          <form class="text-center border border-light" [formGroup]="userForm">
-            <div class="row">
-              <div class="col">
-                <label for="lastname">Last name</label>
-                <input
-                  type="text"
-                  formControlName="lastname"
-                  class="form-control mb-4"
-                  placeholder="Lastname"
-                />
-              </div>
-              <div class="col">
-                <label for="firstname">First name</label>
-                <input
-                  type="text"
-                  formControlName="firstname"
-                  class="form-control mb-4"
-                  placeholder="firstname"
-                />
-              </div>
-            </div>
-            <label for="email">Email</label>
-            <input
-              type="email"
-              formControlName="email"
-              class="form-control mb-4"
-              placeholder="E-mail"
-            />
-            <div class="row">
-              <div class="col">
-                <label for="role">Role</label>
-                <input
-                  type="text"
-                  formControlName="role"
-                  class="form-control mb-4"
-                  placeholder="role"
-                />
-              </div>
-            </div>
-            <label for="createdAt">Account created at :</label>
+          <h5 class="card-title mb-4">Delivery infos</h5>
+          <form
+            class="text-center border border-light"
+            [formGroup]="addressForm"
+            (ngSubmit)="registerAddress()"
+          >
+            <label for="country">Country*</label>
             <input
               type="text"
-              formControlName="createdAt"
+              formControlName="country"
               class="form-control mb-4"
+              placeholder="Country"
             />
+            <div class="row">
+              <div class="col">
+                <label for="city">City*</label>
+                <input
+                  type="text"
+                  formControlName="city"
+                  class="form-control mb-4"
+                  placeholder="city"
+                />
+              </div>
+              <div class="col">
+                <label for="zip">Zip code*</label>
+                <input
+                  type="text"
+                  formControlName="zip"
+                  class="form-control mb-4"
+                  placeholder="zip"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="street">Street*</label>
+                <input
+                  type="text"
+                  formControlName="street"
+                  class="form-control mb-4"
+                  placeholder="street"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="number">Number*</label>
+                <input
+                  type="text"
+                  formControlName="number"
+                  class="form-control mb-4"
+                  placeholder="number"
+                />
+              </div>
+              <div class="col">
+                <label for="box">Box</label>
+                <input
+                  type="text"
+                  formControlName="box"
+                  class="form-control mb-4"
+                  placeholder="box"
+                />
+              </div>
+            </div>
+            <p class="text-start">*Required fields</p>
             <button
-              class="btn btn-block btn-info my-4"
+              class="btn btn-block btn-info my-2"
               block="true"
               type="submit"
+              [disabled]="!addressForm.valid"
             >
-              Update infos
+              Update address
             </button>
+            <div class="alert alert-success text-center" *ngIf="addressSuccess">
+              User updated successfully !
+            </div>
           </form>
         </div>
       </div>
