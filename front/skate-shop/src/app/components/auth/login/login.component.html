@@ -41,6 +41,9 @@
             >
               Sign in
             </button>
+            <div class="alert alert-danger text-center" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </div>
             <!-- Register -->
             <p>
               Not a member?

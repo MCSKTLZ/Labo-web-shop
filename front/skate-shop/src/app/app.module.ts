@@ -17,6 +17,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddressComponent } from './components/users/address/address.component';
 import { NavUserComponent } from './components/users/nav-user/nav-user.component';
 import { ChangePassComponent } from './components/users/change-pass/change-pass.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ChangePassComponent } from './components/users/change-pass/change-pass.
     UserProfileComponent,
     AddressComponent,
     NavUserComponent,
-    ChangePassComponent
+    ChangePassComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

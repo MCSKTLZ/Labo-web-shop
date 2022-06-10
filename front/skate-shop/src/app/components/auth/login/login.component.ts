@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   signinForm!: FormGroup;
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage! : string;
   role!: string;
 
   constructor(public fb: FormBuilder, private tokenStorage : TokenStorageService, public router: Router) {
@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
   }
   handleError(data: any ) {
     this.errorMessage = data.error.message;
+    
     this.isLoginFailed = true;
   }
 }
