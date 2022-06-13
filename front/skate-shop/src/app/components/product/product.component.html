@@ -1,10 +1,14 @@
 <div class="product tumbnail thumbnail-3 mt-4">
-  <a href="#"
+  <div class="alert-danger" *ngIf="Item.status === 'outOfStock'">
+    Out of Stock
+  </div>
+  <div class="alert-success" *ngIf="Item.status === 'live'">Live</div>
+  <a href="product/{{ Item.id }}"
     ><img src="../../../assets/img/skateboard_PNG11749.png" alt=""
   /></a>
   <div class="caption">
     <h6>
-      <a class="nav-link" href="#">{{ Item.name }}</a>
+      <a class="nav-link" href="product/{{ Item.id }}">{{ Item.name }}</a>
     </h6>
     <div *ngIf="Item.promo > 0">
       <span class="price">

@@ -18,6 +18,7 @@ import { AddressComponent } from './components/users/address/address.component';
 import { NavUserComponent } from './components/users/nav-user/nav-user.component';
 import { ChangePassComponent } from './components/users/change-pass/change-pass.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProductComponent } from './components/product/product.component';
     AddressComponent,
     NavUserComponent,
     ChangePassComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

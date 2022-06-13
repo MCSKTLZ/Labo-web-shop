@@ -13,5 +13,6 @@ router.post("/login", authController.signIn);
 router.get("/product", productController.getAllProduct);
 router.get("/product/:id", productController.getProductById);
 router.get("/category", categoryController.getAllCategory);
+router.post("/products/search", productController.searchProduct);
 
 module.exports = router;

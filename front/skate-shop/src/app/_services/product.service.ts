@@ -21,4 +21,20 @@ export class ProductService {
       })
     );
   }
+
+  searchProducts(search : any) : Observable<any> {
+    return this.http.post(AUTH_API + "/products/search", search, httpOptions).pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
+
+  getProductById(id: any) : Observable<any> {
+    return this.http.get(AUTH_API + "/product/" + id, httpOptions).pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
 }
