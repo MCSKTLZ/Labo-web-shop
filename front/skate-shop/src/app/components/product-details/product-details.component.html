@@ -28,25 +28,48 @@
                 <span
                   *ngIf="product.Brand"
                   class="text-uppercase text-muted brand"
-                  >{{ product.Brand.name }}</span
-                >
+                  >{{ product.Brand.name }}
+                </span>
                 <h5 class="text-uppercase">{{ product.name }}</h5>
-                <div class="price d-flex flex-row align-items-center">
-                  <span class="act-price">$20 </span>
+                <div
+                  class="price d-flex flex-row align-items-center"
+                  *ngIf="product.promo > 0"
+                >
+                  <span class="act-price"
+                    >{{
+                      (product.price * ((100 - product.promo) / 100)).toFixed(
+                        2
+                      )
+                    }}€
+                  </span>
                   <div class="ms-2">
-                    <small class="dis-price"> $59</small>
+                    <small class="dis-price"> {{ product.price }}</small>
                   </div>
                 </div>
+                <div
+                  class="price d-flex flex-row align-items-center"
+                  *ngIf="product.promo == 0"
+                >
+                  <span class="act-price">{{ product.price }}€ </span>
+                </div>
+                <p class="about">
+                  {{ product.description }}
+                </p>
+                <div class="cart mt-4 align-items-center">
+                  <button
+                    class="btn btn-danger text-uppercase mr-2 px-4"
+                    *ngIf="product.stock > 0"
+                  >
+                    Add to cart
+                  </button>
+                  <button
+                    class="btn btn-danger text-uppercase mr-2 px-4 disabled"
+                    *ngIf="product.stock <= 0"
+                  >
+                    Out of stock
+                  </button>
+                </div>
               </div>
-              <p class="about">
-                {{ product.description }}
-              </p>
-              <div class="cart mt-4 align-items-center">
-                <button class="btn btn-danger text-uppercase mr-2 px-4">
-                  Add to cart
-                </button>
-              </div>
-              <span class="ms-1 text-muted brand">{{ product.status }}</span>
             </div>
           </div>
         </div>
