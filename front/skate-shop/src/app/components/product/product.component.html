@@ -3,8 +3,18 @@
     ><img src="../../../assets/img/skateboard_PNG11749.png" alt=""
   /></a>
   <div class="caption">
-    <h6><a class="nav-link" href="#">Short Sleeve T-Shirt</a></h6>
-    <span class="price"> <del>$24.99</del></span
-    ><span class="price sale">$12.49</span>
+    <h6>
+      <a class="nav-link" href="#">{{ Item.name }}</a>
+    </h6>
+    <div *ngIf="Item.promo > 0">
+      <span class="price">
+        <del>{{ Item.price }}€</del></span
+      ><span class="price sale"
+        >{{ (Item.price * ((100 - Item.promo) / 100)).toFixed(2) }}€</span
+      >
+    </div>
+    <div *ngIf="Item.promo == 0">
+      <span class="price sale">{{ Item.price }}€</span>
+    </div>
   </div>
 </div>
