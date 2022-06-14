@@ -106,7 +106,15 @@
             </ul>
           </li>
           <li class="nav-item fs-4">
-            <a class="nav-link" role="button"><i class="bi bi-cart4"></i></a>
+            <a class="nav-link position-relative" role="button"
+              ><i class="bi bi-cart4">
+                <span
+                  *ngIf="isConnected"
+                  class="position-absolute top-45 start-100 translate-middle badge rounded-pill bg-danger"
+                  >{{ cart }}</span
+                ></i
+              ></a
+            >
           </li>
         </ul>
       </div>

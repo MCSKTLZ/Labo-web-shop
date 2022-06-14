@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     this.tokenStorage.saveUser(data);
     this.isLoginFailed = false;
     this.role = this.tokenStorage.getUser().role;
-    this.router.navigate(['user-profile/' + this.tokenStorage.getUser().id]);
+    this.router.navigate(['home']);
   }
   handleError(data: any ) {
     this.errorMessage = data.error.message;

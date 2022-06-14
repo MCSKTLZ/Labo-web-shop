@@ -42,7 +42,7 @@ router.patch(
   cartController.removeFromCart
 );
 router.get(
-  "/cart/all",
+  "/cart/all/:id",
   auth.verifytoken,
   auth.isHim,
   cartController.getAllCart

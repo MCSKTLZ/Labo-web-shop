@@ -42,4 +42,8 @@ export class UserService {
   changePass(password : any, id : number) : Observable<any> {
     return this.http.patch(this.endpoint + "/users/password/" + id, password )
   }
+
+  getAllCart(id: any): Observable<any> {
+    return this.http.get(this.endpoint + "/users/cart/all/" + id)
+  }
 }
