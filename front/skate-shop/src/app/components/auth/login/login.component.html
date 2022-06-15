@@ -1,6 +1,22 @@
 <div class="container pt-5">
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">
+      <div
+        class="alert alert-warning d-flex align-items-center"
+        role="alert"
+        *ngIf="previousUrl != null"
+      >
+        <svg
+          class="bi flex-shrink-0 me-2"
+          width="24"
+          height="24"
+          role="img"
+          aria-label="Warning:"
+        >
+          <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>You have to be logged in to access {{ previousUrl }}</div>
+      </div>
       <div class="card">
         <div class="card-body p-4">
           <!-- Default form login -->

@@ -18,14 +18,10 @@ export class NavMenuComponent implements OnInit {
   public cart : any;
   public user : any;
 
-  previousUrl: string = null
-  previousNavigation: any
-
   constructor(
     private tokenStorage : TokenStorageService, 
     public router : Router, 
     private userService : UserService,
-    private urlService : UrlService,
     public location : Location) 
     {
     this.tokenStorage.currentUser.subscribe({
@@ -44,10 +40,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.urlService.previousUrl$.subscribe((previousUrl : string) => {
-      this.previousUrl = previousUrl
-      console.log('previous url :', this.previousUrl);
-    })
+    
   }
 
   logout() {

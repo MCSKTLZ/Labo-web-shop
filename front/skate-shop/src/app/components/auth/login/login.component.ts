@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Router } from '@angular/router';
+import { UrlService } from 'src/app/_helpers/url.service';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,14 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage! : string;
   role!: string;
+  previousUrl : string;
+  conMessage : string;
 
-  constructor(public fb: FormBuilder, private tokenStorage : TokenStorageService, public router: Router) {
+  constructor(
+      public fb: FormBuilder,
+      private tokenStorage : TokenStorageService,
+      public router: Router,
+      private urlService : UrlService) {
       this.tokenStorage.currentUser.subscribe({
         next : (user) => {
           this.isLoggedIn = this.tokenStorage.isConnected();
@@ -40,6 +47,10 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.role = this.tokenStorage.getUser().role;
     }
+    this.urlService.previousUrl$.subscribe((previousUrl : string) => {
+      this.previousUrl = previousUrl
+      console.log('previous url :', this.previousUrl);
+    })
   }
   loginUser() {
     this.tokenStorage.login(this.signinForm.value).subscribe(
