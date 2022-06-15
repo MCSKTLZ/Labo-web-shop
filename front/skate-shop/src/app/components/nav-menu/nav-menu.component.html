@@ -106,7 +106,10 @@
             </ul>
           </li>
           <li class="nav-item fs-4">
-            <a class="nav-link position-relative" role="button"
+            <a
+              class="nav-link position-relative"
+              role="button"
+              [routerLink]="['/cart', user?.id]"
               ><i class="bi bi-cart4">
                 <span
                   *ngIf="isConnected"
