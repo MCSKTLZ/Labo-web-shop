@@ -1,1 +1,86 @@
-<p>cart works!</p>
+<section class="shopping-cart dark">
+  <div class="container">
+    <div class="block-heading">
+      <h1 class="text-center mt-4">My Cart</h1>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="items">
+            <div class="product" *ngFor="let p of products">
+              <div class="row">
+                <div class="col-md-3">
+                  <img
+                    class="img-fluid mx-auto d-block image"
+                    src="../../../../assets/img/Penny-Skateboard-PNG-Transparent-Image.png"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="info">
+                    <div class="row">
+                      <div class="col-md-5 product-name">
+                        <div class="product-name">
+                          <a [routerLink]="['/product/', p.id]">{{ p.name }}</a>
+                          <div class="product-info">
+                            <div>
+                              Brand:
+                              <span class="value">{{ p.Brand?.name }}</span>
+                            </div>
+                            <div>
+                              Description:
+                              <span class="value">{{ p.description }}</span>
+                            </div>
+                            <div *ngIf="p.Categories.length > 0">
+                              Category:
+                              <span
+                                class="value"
+                                *ngFor="let c of p.Categories"
+                                >{{ c.name }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 quantity">
+                        <label for="quantity">Quantity:</label>
+                        <input
+                          id="quantity"
+                          type="number"
+                          value="1"
+                          class="form-control quantity-input"
+                        />
+                      </div>
+                      <div class="col-md-3 price">
+                        <span>$120</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="summary">
+            <h3>Summary</h3>
+            <div class="summary-item">
+              <span class="text">Subtotal</span><span class="price">$360</span>
+            </div>
+            <div class="summary-item">
+              <span class="text">Discount</span><span class="price">$0</span>
+            </div>
+            <div class="summary-item">
+              <span class="text">Shipping</span><span class="price">$0</span>
+            </div>
+            <div class="summary-item">
+              <span class="text">Total</span><span class="price">$360</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg btn-block">
+              Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

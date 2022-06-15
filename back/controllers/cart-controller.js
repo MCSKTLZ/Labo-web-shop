@@ -82,7 +82,17 @@ exports.getAllCart = async (req, res, next) => {
       include: [
         {
           model: dbConnector.Product,
-          attributes: { exclude: ["createdAt", "updatedAt"] },
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          include: [
+            {
+              model: dbConnector.Category,
+            },
+            {
+              model: dbConnector.Brand,
+            },
+          ],
         },
       ],
     });
