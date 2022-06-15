@@ -5,7 +5,8 @@ exports.addToCart = async (req, res, next) => {
     const cart = await dbConnector.Cart.findOne({
       where: { UserId: req.userID },
     });
-    const product = await dbConnector.Product.findByPk(req.body.productId);
+    const product = await dbConnector.Product.findByPk(req.params.id);
+    console.log(product);
     const price = product.price * ((100 - product.promo) / 100);
     const totalPrice = price + cart.totalPrice;
     const cartProduct = await cart.getProducts({ joinTableAttributes: [] });
@@ -48,9 +49,9 @@ exports.removeFromCart = async (req, res, next) => {
     const cart = await dbConnector.Cart.findOne({
       where: { UserId: req.userID },
     });
-    const product = await dbConnector.Product.findByPk(req.body.productId);
+    const product = await dbConnector.Product.findByPk(req.params.id);
     const price = product.price * ((100 - product.promo) / 100);
-    const totalPrice = price - cart.totalPrice;
+    const totalPrice = cart.totalPrice - price;
     let cart_product = await dbConnector.Cart_Product.findOne({
       where: { CartId: cart.id, ProductId: product.id },
     });

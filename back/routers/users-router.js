@@ -29,14 +29,14 @@ router.patch(
 );
 router.delete("/:id", auth.verifytoken, auth.isHim, usersController.deleteUser);
 //cart routes
-router.post(
-  "/cart/product",
+router.get(
+  "/cart/product/:id",
   auth.verifytoken,
   auth.isHim,
   cartController.addToCart
 );
-router.patch(
-  "/cart/product",
+router.delete(
+  "/cart/product/:id",
   auth.verifytoken,
   auth.isHim,
   cartController.removeFromCart

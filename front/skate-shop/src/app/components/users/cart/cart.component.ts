@@ -9,6 +9,8 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class CartComponent implements OnInit {
   products : any[]
+  subTotal : number
+  cart : any
 
   constructor(
     private userService : UserService,
@@ -19,11 +21,29 @@ export class CartComponent implements OnInit {
     this.userService.getAllCart(id).subscribe((res) => {
       console.log(res);
       this.products = res.cart.Products
+      this.cart = res.cart
     })
+    
     }
 
   ngOnInit(): void {
   }
 
+  calcSubtotal() {
+    return this.products.reduce((a, b) => a + (b["price"]*b["Cart_Product"].quantity || 0), 0);
+  }
+
+  addToCart(id: any) {
+    this.userService.addProductToCart(id).subscribe((res) => {
+      console.log(res);
+      
+    })
+  }
+  removeFromCart(id: any) {
+    this.userService.removeFromCart(id).subscribe((res) => {
+      console.log(res);
+      
+    })
+  }
 
 }

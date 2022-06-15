@@ -25,9 +25,7 @@
                 </div>
               </div>
               <div class="mt-4 mb-3">
-                <span
-                  *ngIf="product.Brand"
-                  class="text-uppercase text-muted brand"
+                <span *ngIf="product.Brand" class="text-muted brand"
                   >{{ product.Brand.name }}
                 </span>
                 <h5 class="text-uppercase">{{ product.name }}</h5>
@@ -43,7 +41,7 @@
                     }}€
                   </span>
                   <div class="ms-2">
-                    <small class="dis-price"> {{ product.price }}</small>
+                    <small class="dis-price"> {{ product.price }}€</small>
                   </div>
                 </div>
                 <div
@@ -57,13 +55,14 @@
                 </p>
                 <div class="cart mt-4 align-items-center">
                   <button
-                    class="btn btn-danger text-uppercase mr-2 px-4"
+                    (click)="addToCart(product.id)"
+                    class="btn btn-danger mr-2 px-4"
                     *ngIf="product.stock > 0"
                   >
                     Add to cart
                   </button>
                   <button
-                    class="btn btn-danger text-uppercase mr-2 px-4 disabled"
+                    class="btn btn-danger mr-2 px-4 disabled"
                     *ngIf="product.stock <= 0"
                   >
                     Out of stock

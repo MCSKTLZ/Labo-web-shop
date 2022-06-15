@@ -1,3 +1,12 @@
+.dis-price{
+	color:red;
+	text-decoration: line-through
+}
+.boutton{
+	margin: 5px;
+	height: 30px;
+	width: 30px;
+}
 .shopping-cart{
 	padding-bottom: 50px;
 }
@@ -65,7 +74,7 @@
 
 .shopping-cart .items .product .info .quantity .quantity-input{
     margin: auto;
-    width: 80px;
+    width: 30px;
 }
 
 .shopping-cart .items .product .info .price{
