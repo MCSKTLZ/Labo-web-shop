@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   subTotal : number
   cart : any
   userId : any
+  outOfStock : boolean = false
 
   constructor(
     private userService : UserService,
@@ -19,12 +20,7 @@ export class CartComponent implements OnInit {
     )  
     { 
     this.userId = this.actRoute.snapshot.paramMap.get('id')
-    this.userService.getAllCart(this.userId).subscribe((res) => {
-      console.log(res);
-      this.products = res.cart.Products
-      this.cart = res.cart
-    })
-    
+    this.getAllCart()
     }
 
   ngOnInit(): void {
@@ -34,19 +30,21 @@ export class CartComponent implements OnInit {
     return this.products.reduce((a, b) => a + (b["price"]*b["Cart_Product"].quantity || 0), 0);
   }
 
-  addToCart(id: any) {
-    this.userService.addProductToCart(id).subscribe((res) => {
-      console.log(res);
-      this.userService.getAllCart(this.userId).subscribe((cart) => {
-        console.log(cart);
-        
-      })
+  async addToCart(id: any) {
+    this.userService.addProductToCart(id, this.userId).subscribe((res) => {
+      this.getAllCart();
     })
   }
-  removeFromCart(id: any) {
-    this.userService.removeFromCart(id).subscribe((res) => {
-      console.log(res);
+  async removeFromCart(id: any) {
+    this.userService.removeFromCart(id, this.userId).subscribe((res) => {
+      this.getAllCart();
     })
   }
 
+  getAllCart() {
+    this.userService.getAllCart(this.userId).subscribe((res) => {
+      this.products = res.cart.Products
+      this.cart = res.cart
+    })
+  }
 }

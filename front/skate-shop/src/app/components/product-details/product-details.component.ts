@@ -12,6 +12,7 @@ import { UserService } from 'src/app/_services/user.service';
 export class ProductDetailsComponent implements OnInit {
 
   product : any
+  user : any
 
   constructor( 
     private actRoute: ActivatedRoute,
@@ -24,17 +25,16 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getProductById(id).subscribe((res) => {
       this.product = res
       console.log(this.product);
-      
     })
+    this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
     }
 
   ngOnInit(): void {
   }
 
   addToCart(id: any) {
-    this.userService.addProductToCart(id).subscribe((res)=> {
+    this.userService.addProductToCart(id, this.user.id).subscribe((res)=> {
       console.log(res);
-      
     })
   }
 }

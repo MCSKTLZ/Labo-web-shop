@@ -6,8 +6,10 @@ exports.addToCart = async (req, res, next) => {
       where: { UserId: req.userID },
     });
     const product = await dbConnector.Product.findByPk(req.params.id);
-    console.log(product);
-    const price = product.price * ((100 - product.promo) / 100);
+    let price = product.price;
+    if (product.promo > 0) {
+      price = price * ((100 - product.promo) / 100);
+    }
     const totalPrice = price + cart.totalPrice;
     const cartProduct = await cart.getProducts({ joinTableAttributes: [] });
     const cart_product = await dbConnector.Cart_Product.findOne({

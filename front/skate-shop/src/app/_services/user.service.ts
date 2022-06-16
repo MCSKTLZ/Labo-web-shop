@@ -46,10 +46,10 @@ export class UserService {
   getAllCart(id: any): Observable<any> {
     return this.http.get(this.endpoint + "/users/cart/all/" + id)
   }
-  addProductToCart(id: any) : Observable<any>{ 
-    return this.http.get(this.endpoint + "/users/cart/product/" + id)
+  addProductToCart(id: any, userId :any) : Observable<any>{ 
+    return this.http.get(this.endpoint + "/users/cart/product/" + id + "/" + userId)
   }
-  removeFromCart(id: any) : Observable<any>{
-    return this.http.delete(this.endpoint + "/users/cart/product/" + id)
+  removeFromCart(id: any, userId : any) : Observable<any>{
+    return this.http.delete(this.endpoint + "/users/cart/product/" + id + "/" + userId)
   }
 }

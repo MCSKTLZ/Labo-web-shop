@@ -164,20 +164,23 @@
             <h3>Summary</h3>
             <div class="summary-item">
               <span class="text">Subtotal</span
-              ><span class="price">{{ calcSubtotal().toFixed(2) }}€</span>
+              ><span class="price">{{ calcSubtotal().toFixed(2) }} €</span>
             </div>
             <div class="summary-item">
               <span class="text">Discount</span
-              ><span class="price">{{
-                (calcSubtotal().toFixed(2) - cart.totalPrice).toFixed(2)
-              }}</span>
+              ><span class="price"
+                >{{
+                  (calcSubtotal().toFixed(2) - cart.totalPrice).toFixed(2)
+                }}
+                €</span
+              >
             </div>
             <!-- <div class="summary-item">
               <span class="text">Shipping</span><span class="price">$0</span>
             </div> -->
             <div class="summary-item">
               <span class="text">Total</span
-              ><span class="price">{{ cart.totalPrice }}</span>
+              ><span class="price">{{ cart.totalPrice }} €</span>
             </div>
             <button type="button" class="btn btn-primary btn-lg btn-block">
               Checkout
