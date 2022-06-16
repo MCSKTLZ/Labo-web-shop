@@ -14,6 +14,7 @@ export class ChangePassComponent implements OnInit {
   passForm : FormGroup;
   currentUser : any;
   errorMessage! : string;
+  passChanged : Boolean = false
 
   constructor(public router : Router, private actRoute: ActivatedRoute, private userService : UserService) { 
     let id = this.actRoute.snapshot.paramMap.get('id');
@@ -48,8 +49,8 @@ export class ChangePassComponent implements OnInit {
     })
   }
   succesUpdate() {
-    this.errorMessage = "Password updated"
-    this.router.navigate(['user-profile/'+ this.currentUser.id])
+    this.passForm.setValue({password : "", newPassword : "", newPasswordRepeat : ""})
+    this.passChanged = true
   }
   handleError(data: any ) {
     this.errorMessage = data.error.message;

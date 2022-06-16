@@ -11,14 +11,15 @@ export class CartComponent implements OnInit {
   products : any[]
   subTotal : number
   cart : any
+  userId : any
 
   constructor(
     private userService : UserService,
     private actRoute: ActivatedRoute
     )  
     { 
-    let id = this.actRoute.snapshot.paramMap.get('id')
-    this.userService.getAllCart(id).subscribe((res) => {
+    this.userId = this.actRoute.snapshot.paramMap.get('id')
+    this.userService.getAllCart(this.userId).subscribe((res) => {
       console.log(res);
       this.products = res.cart.Products
       this.cart = res.cart
@@ -36,13 +37,15 @@ export class CartComponent implements OnInit {
   addToCart(id: any) {
     this.userService.addProductToCart(id).subscribe((res) => {
       console.log(res);
-      
+      this.userService.getAllCart(this.userId).subscribe((cart) => {
+        console.log(cart);
+        
+      })
     })
   }
   removeFromCart(id: any) {
     this.userService.removeFromCart(id).subscribe((res) => {
       console.log(res);
-      
     })
   }
 

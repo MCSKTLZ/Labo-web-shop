@@ -41,18 +41,18 @@ exports.isAdmin = (req, res, next) => {
   }
 };
 
-exports.isHim = (req, res, next) => {
+exports.isHim = async (req, res, next) => {
   try {
-    dbConnector.User.findByPk(req.userID).then((user) => {
-      if (user.id == req.params.id || user.RoleId == 1) {
-        next();
-        return;
-      }
+    const user = await dbConnector.User.findByPk(req.userID);
+    if (user.id == req.params.userId || user.RoleId == 1) {
+      next();
+      return;
+    } else {
       res.status(403).send({
-        message: "Unauthorized",
+        message: "Unauthorized not him",
       });
       return;
-    });
+    }
   } catch (err) {
     res.json({ message: err.errors });
   }

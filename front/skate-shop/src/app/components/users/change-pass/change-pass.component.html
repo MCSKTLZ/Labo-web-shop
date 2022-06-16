@@ -5,6 +5,9 @@
         <app-nav-user></app-nav-user>
         <div class="card-body">
           <h5 class="card-title mb-4">Change password</h5>
+          <div class="alert alert-success" *ngIf="passChanged">
+            Password successfully updated
+          </div>
           <form
             class="text-center border border-light"
             [formGroup]="passForm"

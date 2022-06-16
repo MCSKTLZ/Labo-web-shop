@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 exports.changePassById = async (req, res, next) => {
   try {
     const user = await dbConnector.User.findOne({
-      where: { id: req.params.id },
+      where: { id: req.params.userId },
     });
     if (user) {
       const passwordIsValid = bcrypt.compareSync(
@@ -33,7 +33,7 @@ exports.changePassById = async (req, res, next) => {
       }
     } else {
       res.status(404).send({
-        message: `User with id : ${req.params.id} not found`,
+        message: `User with id : ${req.params.userId} not found`,
       });
       res.write(
         JSON.stringify({ Message: `User ${req.params.name} not found` })
