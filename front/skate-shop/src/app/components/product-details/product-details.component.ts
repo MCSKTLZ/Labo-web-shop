@@ -37,4 +37,7 @@ export class ProductDetailsComponent implements OnInit {
       console.log(res);
     })
   }
+  back() {
+    history.back()
+  }
 }
