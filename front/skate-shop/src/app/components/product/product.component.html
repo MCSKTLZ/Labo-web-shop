@@ -20,5 +20,10 @@
     <div *ngIf="Item.promo == 0">
       <span class="price sale">{{ Item.price }}€</span>
     </div>
+    <div *ngIf="isAdmin">
+      <button class="btn btn-info" (click)="updateProduct(Item.id)">
+        Update
+      </button>
+    </div>
   </div>
 </div>

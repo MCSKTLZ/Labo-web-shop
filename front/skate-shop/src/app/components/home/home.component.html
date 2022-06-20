@@ -19,7 +19,7 @@
   </div>
   <div class="row flow-offset-1">
     <div class="col-xs-6 col-md-4" *ngFor="let p of products">
-      <app-product [Item]="p"></app-product>
+      <app-product [Item]="p" [isAdmin]="isAdmin"></app-product>
     </div>
   </div>
 </div>

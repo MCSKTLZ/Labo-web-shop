@@ -9,6 +9,7 @@ import { ChangePassComponent } from './components/users/change-pass/change-pass.
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/users/cart/cart.component';
 import { IsLoggedGuard } from './_helpers/guards/is-logged.guard';
+import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'user-profile/address/:id', component: AddressComponent, canActivate : [IsLoggedGuard]},
   { path: 'user-profile/pass-change/:id', component: ChangePassComponent, canActivate : [IsLoggedGuard]},
   { path: 'product/:id', component: ProductDetailsComponent},
-  { path: 'cart/:id', component: CartComponent, canActivate : [IsLoggedGuard]}
+  { path: 'cart/:id', component: CartComponent, canActivate : [IsLoggedGuard]},
+  { path: 'admin/update-product/:id', component: UpdateProductComponent, canActivate : [IsLoggedGuard]},
 ];
 
 @NgModule({
