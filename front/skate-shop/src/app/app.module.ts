@@ -20,6 +20,8 @@ import { ChangePassComponent } from './components/users/change-pass/change-pass.
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/users/cart/cart.component';
+import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
+import { AddProductComponent } from './components/admin/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CartComponent } from './components/users/cart/cart.component';
     ChangePassComponent,
     ProductComponent,
     ProductDetailsComponent,
-    CartComponent
+    CartComponent,
+    UpdateProductComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
