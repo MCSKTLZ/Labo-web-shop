@@ -22,6 +22,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CartComponent } from './components/users/cart/cart.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
+import { AddCatBrandComponent } from './components/admin/add-cat-brand/add-cat-brand.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AddProductComponent } from './components/admin/add-product/add-product.
     ProductDetailsComponent,
     CartComponent,
     UpdateProductComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddCatBrandComponent
   ],
   imports: [
     BrowserModule,

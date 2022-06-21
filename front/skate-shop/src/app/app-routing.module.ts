@@ -9,21 +9,33 @@ import { ChangePassComponent } from './components/users/change-pass/change-pass.
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/users/cart/cart.component';
 import { IsLoggedGuard } from './_helpers/guards/is-logged.guard';
+import { IsAdminGuard } from './_helpers/guards/is-admin.guard';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
+import { AddCatBrandComponent } from './components/admin/add-cat-brand/add-cat-brand.component';
 
 const routes: Routes = [
+
+  // all routes
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component : SignupComponent},
   { path: 'login', component : LoginComponent},
+
+  //logged routes
+
   { path: 'user-profile/:id', component: UserProfileComponent, canActivate : [IsLoggedGuard]},
   { path: 'user-profile/address/:id', component: AddressComponent, canActivate : [IsLoggedGuard]},
   { path: 'user-profile/pass-change/:id', component: ChangePassComponent, canActivate : [IsLoggedGuard]},
   { path: 'product/:id', component: ProductDetailsComponent},
   { path: 'cart/:id', component: CartComponent, canActivate : [IsLoggedGuard]},
-  { path: 'admin/update-product/:id', component: UpdateProductComponent, canActivate : [IsLoggedGuard]},
-  { path: 'admin/add-product', component: AddProductComponent, canActivate : [IsLoggedGuard]},
+
+  //Admin routes
+
+  { path: 'admin/update-product/:id', component: UpdateProductComponent, canActivate : [IsAdminGuard]},
+  { path: 'admin/add-product', component: AddProductComponent, canActivate : [IsAdminGuard]},
+  { path: 'admin/add-cat-brand', component: AddCatBrandComponent, canActivate : [IsAdminGuard]},
 ];
 
 @NgModule({
