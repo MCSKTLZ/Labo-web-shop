@@ -2,14 +2,19 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-7">
       <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title mb-4" *ngIf="product">
-            Update product #{{ product.id }}
-          </h5>
+        <div
+          class="alert alert-success text-center"
+          *ngIf="addSuccess && !addNew"
+        >
+          <p>Product added successfully !</p>
+          <button class="btn btn-info" (click)="addNewPro()">Add new</button>
+        </div>
+        <div class="card-body" *ngIf="addNew">
+          <h5 class="card-title mb-4">Add new product</h5>
           <form
             class="text-center border border-light"
             [formGroup]="productForm"
-            (ngSubmit)="updateProduct()"
+            (ngSubmit)="addProduct()"
           >
             <div class="row">
               <div class="col">
@@ -85,6 +90,7 @@
                   formControlName="brands"
                   class="form-control form-select mb-4"
                 >
+                  <option value="null"></option>
                   <option *ngFor="let brand of brands" [ngValue]="brand.id">
                     {{ brand.name }}
                   </option>
@@ -96,14 +102,12 @@
                   formControlName="category"
                   class="form-control form-select mb-4"
                 >
+                  <option value="null" selected></option>
                   <option *ngFor="let cat of categories" [ngValue]="cat.id">
                     {{ cat.name }}
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="alert alert-success text-center" *ngIf="updateSuccess">
-              Product added successfully !
             </div>
             <button
               class="btn btn-block btn-info my-2"

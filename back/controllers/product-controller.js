@@ -21,6 +21,7 @@ exports.createProduct = async (req, res, next) => {
         newProduct.BrandId = brand.id;
         newProduct.save();
         return res.status(201).json({
+          id: newProduct.id,
           message: req.body.name + " created",
         });
       } else {
@@ -29,12 +30,14 @@ exports.createProduct = async (req, res, next) => {
         newProduct.BrandId = brand.id;
         newProduct.save();
         return res.status(201).json({
+          id: newProduct.id,
           message: req.body.name + " created",
         });
       }
     }
     const newProduct = await dbConnector.Product.create(req.body);
     res.status(201).json({
+      id: newProduct.id,
       message: req.body.name + " created",
     });
   } catch (err) {

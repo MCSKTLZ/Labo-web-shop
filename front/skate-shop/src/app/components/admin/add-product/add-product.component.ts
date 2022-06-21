@@ -13,7 +13,8 @@ export class AddProductComponent implements OnInit {
 
   product : any
   productForm!: FormGroup;
-  updateSuccess = false;
+  addSuccess = false;
+  addNew = true;
   errorMessage! : string;
   brands : any[]
   categories : any[]
@@ -46,16 +47,22 @@ export class AddProductComponent implements OnInit {
         Validators.maxLength(100)
       ])),
       price: new FormControl ('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.min(1)
       ])),
-      promotion: new FormControl (''),
+      promotion: new FormControl (0, Validators.compose([
+        Validators.min(0),
+        Validators.max(99)
+      ])),
       status: new FormControl ('', Validators.compose([
         Validators.required
       ])),
-      brands: new FormControl (''),
+      brands: new FormControl (null),
       category: new FormControl (''),
-      stock: new FormControl ('', Validators.compose([
-        Validators.required
+      stock: new FormControl (0, Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
       ])),
     });
   }
@@ -63,7 +70,7 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  updateProduct() {
+  addProduct() {
     const productUpInput = this.productForm.value
     const category = {
       id : productUpInput.category
@@ -77,20 +84,24 @@ export class AddProductComponent implements OnInit {
       promo : productUpInput.promotion,
       BrandId : productUpInput.brands
     }
-    this.adminService.updateProduct(this.product.id, productUp)
+
+    this.adminService.addProduct(productUp)
       .subscribe({
-        next : (data) => this.adminService.addCategory(this.product.id, category)
+        next : (d) => this.adminService.addCategory(d.id, category)
           .subscribe({
-            next : (data) => this.updateSuccess = true,
+            next : (data) => (this.addSuccess = true, this.addNew = false),
             error : (e) => this.handleError(e)
           }),
         error : (e) => this.handleError(e)
       })
-      
   }
 
   handleError(data: any ) {
     this.errorMessage = data.error.message;
+    console.log(this.errorMessage);
   }
 
+  addNewPro() {
+    this.addNew = true
+  }
 }

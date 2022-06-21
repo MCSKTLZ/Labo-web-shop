@@ -38,7 +38,7 @@ exports.addCategory = async (req, res, next) => {
       where: { id: req.body.id },
     });
     if (!category) {
-      return res.status(401).json({
+      return res.status(206).json({
         message: req.body.id + " doesn't exist",
       });
     } else {

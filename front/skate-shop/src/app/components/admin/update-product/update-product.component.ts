@@ -70,16 +70,22 @@ export class UpdateProductComponent implements OnInit {
         Validators.maxLength(100)
       ])),
       price: new FormControl ('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.min(1)
       ])),
-      promotion: new FormControl (''),
+      promotion: new FormControl (0, Validators.compose([
+        Validators.min(0),
+        Validators.max(99)
+      ])),
       status: new FormControl ('', Validators.compose([
         Validators.required
       ])),
       brands: new FormControl (''),
       category: new FormControl (''),
-      stock: new FormControl ('', Validators.compose([
-        Validators.required
+      stock: new FormControl (0 , Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
       ])),
     });
   }
@@ -101,6 +107,7 @@ export class UpdateProductComponent implements OnInit {
       promo : productUpInput.promotion,
       BrandId : productUpInput.brands
     }
+    
     this.adminService.updateProduct(this.product.id, productUp)
       .subscribe({
         next : (data) => this.adminService.addCategory(this.product.id, category)
