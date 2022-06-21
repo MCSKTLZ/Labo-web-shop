@@ -3,11 +3,13 @@
     <div class="col-md-7">
       <div class="card text-center">
         <div class="card-body">
-          <h5 class="card-title mb-4">Update product #{{ product.id }}</h5>
+          <h5 class="card-title mb-4" *ngIf="product">
+            Update product #{{ product.id }}
+          </h5>
           <form
             class="text-center border border-light"
             [formGroup]="productForm"
-            (ngSubmit)="(null)"
+            (ngSubmit)="updateProduct()"
           >
             <div class="row">
               <div class="col">
@@ -56,8 +58,10 @@
             <div class="row">
               <div class="col">
                 <label for="status">Product status</label>
-                <select formControlName="status" class="form-control mb-4">
-                  <option disabled="true" selected>Product status</option>
+                <select
+                  formControlName="status"
+                  class="form-control form-select mb-4"
+                >
                   <option value="live">Live</option>
                   <option value="outOfStock">Out of stock</option>
                   <option value="deleted">Deleted</option>
@@ -74,24 +78,41 @@
               </div>
             </div>
 
-            <div class="row"></div>
-            <label for="createdAt">Account created at :</label>
-            <input
-              type="text"
-              formControlName="createdAt"
-              class="form-control mb-4"
-            />
+            <div class="row">
+              <div class="col">
+                <label for="brands">Brand</label>
+                <select
+                  formControlName="brands"
+                  class="form-control form-select mb-4"
+                >
+                  <option *ngFor="let brand of brands" [ngValue]="brand.id">
+                    {{ brand.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="category">Category</label>
+                <select
+                  formControlName="category"
+                  class="form-control form-select mb-4"
+                >
+                  <option *ngFor="let cat of categories" [ngValue]="cat.id">
+                    {{ cat.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="alert alert-success text-center" *ngIf="updateSuccess">
+              Product updated successfully !
+            </div>
             <button
               class="btn btn-block btn-info my-2"
               block="true"
               type="submit"
-              [disabled]=""
+              [disabled]="!productForm.valid"
             >
               Update product
             </button>
-            <!-- <div class="alert alert-success text-center" *ngIf="updateSuccess">
-                User updated successfully !
-              </div> -->
           </form>
         </div>
       </div>

@@ -37,4 +37,21 @@ export class ProductService {
       })
     )
   }
-}
+
+  getAllBrands() : Observable<any> {
+    return this.http.get(AUTH_API + "/brands").pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
+  getAllCategories() : Observable<any> {
+    return this.http.get(AUTH_API + "/category").pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
+ }
+
+

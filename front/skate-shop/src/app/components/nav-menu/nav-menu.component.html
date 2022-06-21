@@ -58,8 +58,13 @@
             >Admin</a
           >
           <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-            <li><a class="dropdown-item" href="#">Add product</a></li>
-            <li><a class="dropdown-item" href="#">Update product</a></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="'admin/add-product'"
+                >Add product</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="#">Add category / Brand</a></li>
+            <li><a class="dropdown-item" href="#">Orders</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>

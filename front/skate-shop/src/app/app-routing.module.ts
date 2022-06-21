@@ -10,6 +10,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CartComponent } from './components/users/cart/cart.component';
 import { IsLoggedGuard } from './_helpers/guards/is-logged.guard';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
+import { AddProductComponent } from './components/admin/add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailsComponent},
   { path: 'cart/:id', component: CartComponent, canActivate : [IsLoggedGuard]},
   { path: 'admin/update-product/:id', component: UpdateProductComponent, canActivate : [IsLoggedGuard]},
+  { path: 'admin/add-product', component: AddProductComponent, canActivate : [IsLoggedGuard]},
 ];
 
 @NgModule({

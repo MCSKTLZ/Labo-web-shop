@@ -4,6 +4,7 @@ const productController = require("../controllers/product-controller");
 const categoryController = require("../controllers/category-controller");
 const authController = require("../middlewares/auth-controller");
 const usersController = require("../controllers/user-controller");
+const brandController = require("../controllers/brand-controller");
 
 //signin and signup routes
 router.post("/signup", usersController.createUser);
@@ -14,5 +15,8 @@ router.get("/product", productController.getAllProduct);
 router.get("/product/:id", productController.getProductById);
 router.get("/category", categoryController.getAllCategory);
 router.post("/products/search", productController.searchProduct);
+
+//get all brands
+router.get("/brands", brandController.getAllBrand);
 
 module.exports = router;

@@ -1,1 +1,121 @@
-<p>add-product works!</p>
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title mb-4" *ngIf="product">
+            Update product #{{ product.id }}
+          </h5>
+          <form
+            class="text-center border border-light"
+            [formGroup]="productForm"
+            (ngSubmit)="updateProduct()"
+          >
+            <div class="row">
+              <div class="col">
+                <label for="productName">Product name</label>
+                <input
+                  type="text"
+                  formControlName="productName"
+                  class="form-control mb-4"
+                  placeholder="Product name"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="description">Description</label>
+                <textarea
+                  type="text"
+                  formControlName="description"
+                  class="form-control mb-4"
+                  placeholder="Description of product"
+                  cols="30"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="price">Price</label>
+                <input
+                  type="number"
+                  formControlName="price"
+                  class="form-control mb-4"
+                  placeholder="price in €"
+                />
+              </div>
+              <div class="col">
+                <label for="promo">Promotion</label>
+                <input
+                  type="number"
+                  formControlName="promotion"
+                  class="form-control mb-4"
+                  placeholder="Promo in %"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="status">Product status</label>
+                <select
+                  formControlName="status"
+                  class="form-control form-select mb-4"
+                >
+                  <option value="live">Live</option>
+                  <option value="outOfStock">Out of stock</option>
+                  <option value="deleted">Deleted</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="stock">Stock</label>
+                <input
+                  type="number"
+                  formControlName="stock"
+                  class="form-control mb-4"
+                  placeholder="Product stock"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="brands">Brand</label>
+                <select
+                  formControlName="brands"
+                  class="form-control form-select mb-4"
+                >
+                  <option *ngFor="let brand of brands" [ngValue]="brand.id">
+                    {{ brand.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="category">Category</label>
+                <select
+                  formControlName="category"
+                  class="form-control form-select mb-4"
+                >
+                  <option *ngFor="let cat of categories" [ngValue]="cat.id">
+                    {{ cat.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="alert alert-success text-center" *ngIf="updateSuccess">
+              Product added successfully !
+            </div>
+            <button
+              class="btn btn-block btn-info my-2"
+              block="true"
+              type="submit"
+              [disabled]="!productForm.valid"
+            >
+              Add product
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,17 +35,17 @@ exports.getAllCategory = async (req, res, next) => {
 exports.addCategory = async (req, res, next) => {
   try {
     const category = await dbConnector.Category.findOne({
-      where: { name: req.body.name },
+      where: { id: req.body.id },
     });
     if (!category) {
       return res.status(401).json({
-        message: req.body.name + " doesn't exist",
+        message: req.body.id + " doesn't exist",
       });
     } else {
       const product = await dbConnector.Product.findByPk(req.params.id);
       product.addCategory(category);
       res.status(200).json({
-        message: req.body.name + " added to product" + req.params.id,
+        message: req.body.id + " added to product" + req.params.id,
       });
     }
   } catch (err) {
