@@ -18,6 +18,9 @@ app.use(function (req, res, next) {
 });
 app.use(cors());
 
+const path = require("path");
+app.use("/product-image", express.static(__dirname + "/product-image"));
+
 const testRouter = require("./routers/perm-router");
 app.use("/test", testRouter);
 

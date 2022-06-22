@@ -1,14 +1,16 @@
 <div class="container mt-5 mb-5">
   <div class="row d-flex justify-content-center">
     <div class="col-md-10">
-      <div class="card">
+      <div class="card" *ngIf="product">
         <div class="row">
           <div class="col-md-6">
             <div class="images p-3">
               <div class="text-center p-4">
                 <img
                   id="main-image"
-                  src="../../../assets/img/Penny-Skateboard-PNG-Transparent-Image.png"
+                  [src]="
+                    'http://localhost:3000/product-image/' + product.imageId
+                  "
                   width="250"
                 />
               </div>
@@ -25,7 +27,7 @@
                 </div>
               </div>
               <div class="mt-4 mb-3">
-                <span *ngIf="product.Brand" class="text-muted brand"
+                <span *ngIf="product.Brand != null" class="text-muted brand"
                   >{{ product.Brand.name }}
                 </span>
                 <h5 class="text-uppercase">{{ product.name }}</h5>
