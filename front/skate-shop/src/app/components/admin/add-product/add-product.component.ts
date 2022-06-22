@@ -18,6 +18,8 @@ export class AddProductComponent implements OnInit {
   errorMessage! : string;
   brands : any[]
   categories : any[]
+  productImage : File;
+  imageChoosen = false;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -87,11 +89,13 @@ export class AddProductComponent implements OnInit {
 
     this.adminService.addProduct(productUp)
       .subscribe({
-        next : (d) => this.adminService.addCategory(d.id, category)
+        next : (d) => (this.adminService.addCategory(d.id, category)
           .subscribe({
             next : (data) => (this.addSuccess = true, this.addNew = false),
             error : (e) => this.handleError(e)
           }),
+          this.submitProductImage(d.id)
+          ),
         error : (e) => this.handleError(e)
       })
   }
@@ -103,5 +107,26 @@ export class AddProductComponent implements OnInit {
 
   addNewPro() {
     this.addNew = true
+  }
+
+  //Upload Image
+  fileChoosen(event : any) {
+    if(event.target.value) {
+      this.productImage = <File>event.target.files[0]
+      this.imageChoosen = true
+      console.log(this.productImage);
+      
+    }
+  }
+
+  submitProductImage(productId : any) {
+    let fd = new FormData();
+    if(this.productImage) {
+      fd.append('simple', this.productImage)
+      this.adminService.uploadImage(productId, fd).subscribe((res) => {
+        console.log(res);
+      })
+      
+    }
   }
 }

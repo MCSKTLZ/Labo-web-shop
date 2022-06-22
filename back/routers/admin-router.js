@@ -6,6 +6,8 @@ const productController = require("../controllers/product-controller");
 const brandContoller = require("../controllers/brand-controller");
 const categoryController = require("../controllers/category-controller");
 const auth = require("../middlewares/auth-jwt");
+const dbConnector = require("../models/dbc").get();
+const { upload } = require("../middlewares/multer");
 
 //All admin permission routes
 
@@ -76,6 +78,22 @@ router.patch(
   auth.verifytoken,
   auth.isAdmin,
   categoryController.addCategory
+);
+
+//upload image
+router.post(
+  "/product/image-upload/:id",
+  auth.verifytoken,
+  auth.isAdmin,
+  upload.single("simple"),
+  async (req, res, next) => {
+    if (req.file) {
+      const product = await dbConnector.Product.findByPk(req.params.id);
+      product.imageId = req.file.filename;
+      product.save();
+      res.status(200).json({ message: "Product image added" });
+    }
+  }
 );
 
 module.exports = router;

@@ -40,4 +40,13 @@ export class AdminService {
         })
       );
   }
+
+  uploadImage(productId: any, productImage : any) : Observable<any> {
+    return this.http.post( AUTH_API + "product/image-upload/" + productId, productImage)
+      .pipe(
+        map((res) => {
+          return res || {};
+        })
+      );
+  }
 }
