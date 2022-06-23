@@ -30,6 +30,14 @@ export class ProductService {
     )
   }
 
+  searchProductByCat(id : any) : Observable<any> {
+    return this.http.get(AUTH_API + "/products/category/" + id, httpOptions).pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
+
   getProductById(id: any) : Observable<any> {
     return this.http.get(AUTH_API + "/product/" + id, httpOptions).pipe(
       map((res) => {
@@ -52,6 +60,8 @@ export class ProductService {
       })
     )
   }
+
+
  }
 
 

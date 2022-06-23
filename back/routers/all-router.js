@@ -15,6 +15,7 @@ router.get("/product", productController.getAllProduct);
 router.get("/product/:id", productController.getProductById);
 router.get("/category", categoryController.getAllCategory);
 router.post("/products/search", productController.searchProduct);
+router.get("/products/category/:id", productController.getProductByCategory);
 
 //get all brands
 router.get("/brands", brandController.getAllBrand);

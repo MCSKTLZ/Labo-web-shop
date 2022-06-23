@@ -1,23 +1,62 @@
 <div class="container">
   <h1 class="text-center mt-4">Product catalog</h1>
   <div class="row">
-    <form
-      class="d-flex ms-3"
-      role="search"
-      [formGroup]="searchForm"
-      (ngSubmit)="searchProduct()"
-    >
-      <input
-        class="form-control me-2"
-        type="search"
-        formControlName="name"
-        placeholder="Search product"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-dark" type="submit">Search</button>
-    </form>
+    <div class="col-sm-3 col-md-4 my-3">
+      <form
+        class="d-flex"
+        role="search"
+        [formGroup]="searchForm"
+        (ngSubmit)="searchProduct()"
+      >
+        <input
+          class="form-control me-2"
+          type="search"
+          formControlName="name"
+          placeholder="Search product"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-sm-3 col-md-4 my-3">
+      <form
+        class="d-flex"
+        [formGroup]="searchByCat"
+        (ngSubmit)="searchByCategory()"
+      >
+        <div class="me-2 pt-1">Categories</div>
+        <select formControlName="catId" class="form-control form-select me-2">
+          <option *ngFor="let cat of categories" [ngValue]="cat.id">
+            {{ cat.name }}
+          </option>
+        </select>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-sm-3 col-md-4 my-3">
+      <form class="d-flex" [formGroup]="searchByCat" (ngSubmit)="(null)">
+        <div class="me-2 pt-1">Brands</div>
+        <select formControlName="catId" class="form-control me-2 form-select">
+          <option *ngFor="let cat of categories" [ngValue]="cat.id">
+            {{ cat.name }}
+          </option>
+        </select>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+    </div>
   </div>
   <div class="row flow-offset-1">
+    <div class="row justify-content-center">
+      <div
+        class="card col-md-9 py-4 my-5 text-center"
+        *ngIf="products.length == 0"
+      >
+        <div>No products found</div>
+        <a class="nav-item pt-2" type="button" (click)="getAllProducts()"
+          ><i class="bi bi-arrow-left"></i>Back</a
+        >
+      </div>
+    </div>
     <div class="col-xs-6 col-md-4" *ngFor="let p of products">
       <app-product [Item]="p" [isAdmin]="isAdmin"></app-product>
     </div>

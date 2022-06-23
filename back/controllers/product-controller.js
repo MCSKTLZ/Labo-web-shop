@@ -145,8 +145,9 @@ exports.searchProduct = async (req, res, next) => {
 
 exports.getProductByCategory = async (req, res, next) => {
   try {
-    const category = await dbConnector.Category.findByPk(req.body.catId);
-    const products = category.getProducts();
+    const category = await dbConnector.Category.findByPk(req.params.id);
+    const products = await category.getProducts();
+    res.status(200).json(products);
   } catch (err) {
     res.json({ message: err.errors });
   }
