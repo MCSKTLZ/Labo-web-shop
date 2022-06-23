@@ -81,7 +81,7 @@ router.patch(
   categoryController.addCategory
 );
 
-//upload image
+//upload/and update image for product
 router.post(
   "/product/image-upload/:id",
   auth.verifytoken,
