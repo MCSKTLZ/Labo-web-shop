@@ -87,6 +87,9 @@ exports.getAllProduct = async (req, res, next) => {
 exports.updateProduct = async (req, res, next) => {
   try {
     const product = await dbConnector.Product.findByPk(req.params.id);
+    if (req.body.brandId) {
+      product.update({ BrandId: req.body.brandId });
+    }
     product.update(req.body);
     res.status(200).json({
       message: `Product name ${product.name} updated`,

@@ -17,6 +17,10 @@ export class UpdateProductComponent implements OnInit {
   errorMessage! : string;
   brands : any[]
   categories : any[]
+  productImage : File;
+  hasProductImage : boolean = false
+  imageChoosen = false;
+
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -47,6 +51,9 @@ export class UpdateProductComponent implements OnInit {
           category : this.product.Categories[0].id
         })
       }
+      }
+      if(this.product.imageId) {
+        this.hasProductImage = true
       }
     })
 
@@ -105,19 +112,39 @@ export class UpdateProductComponent implements OnInit {
       stock : productUpInput.stock,
       status : productUpInput.status,
       promo : productUpInput.promotion,
-      BrandId : productUpInput.brands
+      brandId : productUpInput.brands
     }
     
     this.adminService.updateProduct(this.product.id, productUp)
       .subscribe({
-        next : (data) => this.adminService.addCategory(this.product.id, category)
+        next : (data) => (this.adminService.addCategory(this.product.id, category)
           .subscribe({
             next : (data) => this.updateSuccess = true,
             error : (e) => this.handleError(e)
-          }),
+          }), this.submitProductImage(this.product.id)),
         error : (e) => this.handleError(e)
       })
       
+  }
+
+  fileChoosen(event : any) {
+    if(event.target.value) {
+      this.productImage = <File>event.target.files[0]
+      this.imageChoosen = true
+      console.log(this.productImage);
+      
+    }
+  }
+
+  submitProductImage(productId : any) {
+    let fd = new FormData();
+    if(this.productImage) {
+      fd.append('simple', this.productImage)
+      this.adminService.uploadImage(productId, fd).subscribe((res) => {
+        console.log(res);
+      })
+      
+    }
   }
 
   handleError(data: any ) {

@@ -114,8 +114,6 @@ export class AddProductComponent implements OnInit {
     if(event.target.value) {
       this.productImage = <File>event.target.files[0]
       this.imageChoosen = true
-      console.log(this.productImage);
-      
     }
   }
 

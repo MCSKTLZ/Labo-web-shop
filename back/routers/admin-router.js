@@ -8,6 +8,7 @@ const categoryController = require("../controllers/category-controller");
 const auth = require("../middlewares/auth-jwt");
 const dbConnector = require("../models/dbc").get();
 const { upload } = require("../middlewares/multer");
+const fs = require("fs");
 
 //All admin permission routes
 
@@ -89,9 +90,20 @@ router.post(
   async (req, res, next) => {
     if (req.file) {
       const product = await dbConnector.Product.findByPk(req.params.id);
-      product.imageId = req.file.filename;
-      product.save();
-      res.status(200).json({ message: "Product image added" });
+      if (!product.imageId) {
+        product.imageId = req.file.filename;
+        product.save();
+        res.status(200).json({ message: "Product image added" });
+      } else {
+        fs.unlink("./product-image/" + product.imageId, (err) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log("file deleted");
+        });
+        product.update({ imageId: req.file.filename });
+        res.status(200).json({ message: "Product image updated" });
+      }
     }
   }
 );
