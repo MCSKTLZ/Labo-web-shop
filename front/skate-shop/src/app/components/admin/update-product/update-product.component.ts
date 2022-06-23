@@ -33,6 +33,7 @@ export class UpdateProductComponent implements OnInit {
     this.productService.getProductById(id).subscribe((res) => {
       this.product = res
       
+      
       // update form with currentuser Value 
       this.productForm.patchValue({
         productName : this.product.name,

@@ -122,7 +122,6 @@ exports.getProductById = async (req, res, next) => {
 exports.searchProduct = async (req, res, next) => {
   try {
     const search = await req.body.name;
-    console.log(search);
     const product = await dbConnector.Product.findAll({
       where: {
         name: { [Op.like]: "%" + search + "%" },
@@ -139,6 +138,15 @@ exports.searchProduct = async (req, res, next) => {
       ],
     });
     res.status(200).json(product);
+  } catch (err) {
+    res.json({ message: err.errors });
+  }
+};
+
+exports.getProductByCategory = async (req, res, next) => {
+  try {
+    const category = await dbConnector.Category.findByPk(req.body.catId);
+    const products = category.getProducts();
   } catch (err) {
     res.json({ message: err.errors });
   }

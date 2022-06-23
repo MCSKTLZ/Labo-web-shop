@@ -31,6 +31,11 @@
                   >{{ product.Brand.name }}
                 </span>
                 <h5 class="text-uppercase">{{ product.name }}</h5>
+                <span
+                  *ngIf="product.Categories.length > 0"
+                  class="text-muted brand"
+                  >Category : {{ product.Categories[0].name }}
+                </span>
                 <div
                   class="price d-flex flex-row align-items-center"
                   *ngIf="product.promo > 0"
