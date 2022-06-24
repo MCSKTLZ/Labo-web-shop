@@ -38,6 +38,14 @@ export class ProductService {
     )
   }
 
+  searchProductByBrand(id : any) : Observable<any> {
+    return this.http.get(AUTH_API + "/products/brand/" + id, httpOptions).pipe(
+      map((res) => {
+        return res || {};
+      })
+    )
+  }
+
   getProductById(id: any) : Observable<any> {
     return this.http.get(AUTH_API + "/product/" + id, httpOptions).pipe(
       map((res) => {

@@ -34,11 +34,15 @@
       </form>
     </div>
     <div class="col-sm-3 col-md-4 my-3">
-      <form class="d-flex" [formGroup]="searchByCat" (ngSubmit)="(null)">
+      <form
+        class="d-flex"
+        [formGroup]="searchByBrands"
+        (ngSubmit)="searchByBrand()"
+      >
         <div class="me-2 pt-1">Brands</div>
-        <select formControlName="catId" class="form-control me-2 form-select">
-          <option *ngFor="let cat of categories" [ngValue]="cat.id">
-            {{ cat.name }}
+        <select formControlName="brandId" class="form-control me-2 form-select">
+          <option *ngFor="let brand of brands" [ngValue]="brand.id">
+            {{ brand.name }}
           </option>
         </select>
         <button class="btn btn-outline-dark" type="submit">Search</button>

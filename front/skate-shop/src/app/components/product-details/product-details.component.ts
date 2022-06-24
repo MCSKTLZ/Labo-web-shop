@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.productService.getProductById(id).subscribe((res) => {
       this.product = res
-      console.log(this.product);
+      // console.log(this.product);
     })
     this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
     }
