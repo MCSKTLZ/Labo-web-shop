@@ -1,1 +1,69 @@
-<p>add-cat-brand works!</p>
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Add new Categories/Brands</h5>
+          <form
+            class="text-center border border-light"
+            [formGroup]="addCatForm"
+            (ngSubmit)="createCat()"
+          >
+            <div class="row">
+              <div class="col col-md-8">
+                <label for="category">New category</label>
+                <input
+                  type="text"
+                  formControlName="newCategory"
+                  class="form-control mb-4"
+                  placeholder="Category name"
+                />
+              </div>
+              <div class="col col-md-4 mt-4">
+                <button
+                  class="btn btn-outline-info"
+                  type="submit"
+                  [disabled]="!addCatForm.valid"
+                >
+                  Add category
+                </button>
+              </div>
+              <div class="alert alert-warning" *ngIf="catCreated">
+                {{ catMessage }}
+              </div>
+            </div>
+          </form>
+          <form
+            class="text-center border border-light"
+            [formGroup]="addBrandForm"
+            (ngSubmit)="createBrand()"
+          >
+            <div class="row">
+              <div class="col col-md-8">
+                <label for="category">New Brand</label>
+                <input
+                  type="text"
+                  formControlName="newBrand"
+                  class="form-control mb-4"
+                  placeholder="Brand name"
+                />
+              </div>
+              <div class="col col-md-4 mt-4">
+                <button
+                  class="btn btn-outline-info"
+                  type="submit"
+                  [disabled]="!addBrandForm.valid"
+                >
+                  Add brand
+                </button>
+              </div>
+              <div class="alert alert-warning" *ngIf="brandCreated">
+                {{ brandMessage }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

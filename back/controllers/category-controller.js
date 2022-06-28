@@ -2,10 +2,21 @@ const dbConnector = require("../models/dbc").get();
 
 exports.createCategory = async (req, res, next) => {
   try {
-    const category = await dbConnector.Category.create({ name: req.body.name });
-    res.status(201).json({
-      message: `Category ${category.name}`,
+    const category = await dbConnector.Category.findOne({
+      where: { name: req.body.name.trim() },
     });
+    if (category) {
+      res.status(202).json({
+        message: `Category ${category.name} already exist`,
+      });
+    } else {
+      const newCategory = await dbConnector.Category.create({
+        name: req.body.name.trim(),
+      });
+      res.status(201).json({
+        message: `Category ${newCategory.name} created`,
+      });
+    }
   } catch (err) {
     res.json({ message: err.errors });
   }
