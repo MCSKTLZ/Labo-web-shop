@@ -61,7 +61,7 @@ exports.receiveNewPassword = async (req, res, next) => {
     });
     if (decodedToken != null && decodedToken.id === user.id) {
       if (password.trim() != confirmPassword.trim()) {
-        res.status(400).json({ message: "New password must be the same !" });
+        res.status(400).json({ message: "Passwords must be the same !" });
       } else if (password.trim() == "") {
         res.status(400).json({ message: "Password cannot be empty ! " });
       } else {
@@ -72,7 +72,7 @@ exports.receiveNewPassword = async (req, res, next) => {
         });
       }
     } else {
-      res.status(403).json({ message: "You are not authorized !" });
+      res.status(403).json({ message: "You link is expired !" });
     }
   }
 };

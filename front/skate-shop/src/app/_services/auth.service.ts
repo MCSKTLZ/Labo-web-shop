@@ -34,4 +34,13 @@ export class AuthService {
         })
       );
   }
+
+  resetPassword(id : any, token : any, password : any) :Observable<any> {
+    return this.http.post(AUTH_API + "user/new-password/" + id + "/" + token , password, httpOptions)
+      .pipe(
+        map((res) => {
+          return res || {};
+        })
+      );
+  }
 }
