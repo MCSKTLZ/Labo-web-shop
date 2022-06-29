@@ -56,7 +56,7 @@ exports.receiveNewPassword = async (req, res, next) => {
       if (err) {
         // return res.status(403).json({ message: "Unauthorized!!" });
       } else {
-        return (decodedToken = decoded.id);
+        decodedToken = decoded;
       }
     });
     if (decodedToken != null && decodedToken.id === user.id) {
