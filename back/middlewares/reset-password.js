@@ -23,7 +23,7 @@ exports.sendPasswordResetEmail = async (req, res, next) => {
   const email = req.params.email;
   const user = await dbConnector.User.findOne({ where: { email: email } });
   if (!user) {
-    res.status(404).json("No user with that email");
+    res.status(400).json("An error occured please try again");
   } else {
     // console.log(user);
     const secret = user.password + "-" + user.createdAt.getTime();

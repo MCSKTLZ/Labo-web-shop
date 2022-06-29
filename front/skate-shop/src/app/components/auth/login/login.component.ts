@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   conMessage : string;
 
   constructor(
-      public fb: FormBuilder,
       private tokenStorage : TokenStorageService,
       public router: Router,
       private urlService : UrlService) {
@@ -58,9 +57,6 @@ export class LoginComponent implements OnInit {
         next : (data) => this.storageLogin(data),
         error : (e) => this.handleError(e)
       })
-  }
-  reloadPage(): void {
-    window.location.reload();
   }
   storageLogin(data : any) {
     this.tokenStorage.saveToken(data.accessToken)

@@ -23,6 +23,8 @@ import { CartComponent } from './components/users/cart/cart.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { AddCatBrandComponent } from './components/admin/add-cat-brand/add-cat-brand.component';
+import { PasswordResetMailerComponent } from './components/auth/password-reset-mailer/password-reset-mailer.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AddCatBrandComponent } from './components/admin/add-cat-brand/add-cat-b
     CartComponent,
     UpdateProductComponent,
     AddProductComponent,
-    AddCatBrandComponent
+    AddCatBrandComponent,
+    PasswordResetMailerComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

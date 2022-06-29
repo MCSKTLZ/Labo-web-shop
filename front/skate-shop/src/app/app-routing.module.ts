@@ -13,6 +13,8 @@ import { IsAdminGuard } from './_helpers/guards/is-admin.guard';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { AddCatBrandComponent } from './components/admin/add-cat-brand/add-cat-brand.component';
+import { PasswordResetMailerComponent } from './components/auth/password-reset-mailer/password-reset-mailer.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 
 const routes: Routes = [
 
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component : SignupComponent},
   { path: 'login', component : LoginComponent},
+  { path: 'reset-password-mail', component : PasswordResetMailerComponent},
+  { path: 'password/reset/:id/:token', component : ResetPasswordComponent},
 
   //logged routes
 

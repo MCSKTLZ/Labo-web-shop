@@ -52,8 +52,18 @@ export class AdminService {
 
   createCat(newCat: any) : Observable<any> {
     return this.http.post(AUTH_API + "category/new", newCat , httpOptions)
+      .pipe(
+        map((res) => {
+          return res || {};
+        })
+      );
   }
   createBrand(newBrand: any) : Observable<any> {
     return this.http.post(AUTH_API + "brand/new", newBrand , httpOptions)
+      .pipe(
+        map((res) => {
+          return res || {};
+        })
+      );
   }
 }

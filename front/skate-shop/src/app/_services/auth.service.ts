@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { RegisterUser } from '../shared/models/registerUser';
 
 
@@ -19,11 +19,19 @@ export class AuthService {
   }
 
   register(user : RegisterUser): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', user , httpOptions);
+    return this.http.post(AUTH_API + 'signup', user , httpOptions)
   }
   
   updateUser(user : any, id : number): Observable<any> {
     return this.http.patch(USER_API + 'update/' + id, user, httpOptions)
   }
 
+  sendMailReset(email : any) : Observable<any> {
+    return this.http.post(AUTH_API + 'user/reset-mail/' + email, {} ,httpOptions)
+      .pipe(
+        map((res) => {
+          return res || {};
+        })
+      );
+  }
 }
