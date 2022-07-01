@@ -17,14 +17,14 @@ exports.addToCart = async (req, res, next) => {
     });
     if (cart_product) {
       if (product.stock === 0 || product.stock <= cart_product.quantity) {
-        return res.status(200).json({
-          message: "no product in stock",
+        return res.status(403).json({
+          message: "no more product in stock",
         });
       }
     }
     if (!cart_product && product.stock <= 0) {
-      return res.status(200).json({
-        message: "no product in stock",
+      return res.status(403).json({
+        message: "no more product in stock",
       });
     }
     for (i of cartProduct) {

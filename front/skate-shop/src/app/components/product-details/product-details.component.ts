@@ -16,6 +16,9 @@ export class ProductDetailsComponent implements OnInit {
   product : any
   user : any
   isConnected : boolean
+  userId : any
+  productAdded : string = null
+  errorMessage : string =  null
   public route : ActivatedRouteSnapshot
 
   constructor( 
@@ -27,6 +30,9 @@ export class ProductDetailsComponent implements OnInit {
     ) 
     {
     this.isConnected = this.tokenStorage.isConnected()
+    this.userId = this.tokenStorage.currentUserValue.id
+
+    this.getAllCart()
 
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.productService.getProductById(id).subscribe((res) => {
@@ -43,11 +49,28 @@ export class ProductDetailsComponent implements OnInit {
     if (!this.isConnected) {
       this.router.navigate(['/cart/' + this.user?.id]);
     } else {
-      this.userService.addProductToCart(id, this.user.id).subscribe((res)=> {
-        console.log(res);
-      })
+      this.userService.addProductToCart(id, this.user.id).subscribe(
+        {
+          next : (data) => {            
+            this.productAdded = data.message
+            this.getAllCart()
+          },
+          error : (err) => {
+            this.productAdded = null
+            this.errorMessage = err.error.message
+          },
+        }
+      )
     }
   }
+
+  getAllCart() {
+    this.userService.getAllCart(this.userId).subscribe((res) => {
+      console.log("cart loaded");
+      
+    })
+  }
+
   back() {
     history.back()
   }

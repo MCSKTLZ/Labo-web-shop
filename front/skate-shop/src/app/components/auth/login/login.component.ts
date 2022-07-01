@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Router } from '@angular/router';
 import { UrlService } from 'src/app/_helpers/url.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
   role!: string;
   previousUrl : string;
   conMessage : string;
+  userId : any;
 
   constructor(
       private tokenStorage : TokenStorageService,
       public router: Router,
-      private urlService : UrlService) {
+      private urlService : UrlService,
+      private userService : UserService) {
       this.tokenStorage.currentUser.subscribe({
         next : (user) => {
           this.isLoggedIn = this.tokenStorage.isConnected();
@@ -54,7 +57,9 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.tokenStorage.login(this.signinForm.value).subscribe(
       {
-        next : (data) => this.storageLogin(data),
+        next : (data) => {
+          this.storageLogin(data)
+        } ,
         error : (e) => this.handleError(e)
       })
   }
@@ -63,7 +68,16 @@ export class LoginComponent implements OnInit {
     this.tokenStorage.saveUser(data);
     this.isLoginFailed = false;
     this.role = this.tokenStorage.getUser().role;
+    this.userId = this.tokenStorage.getUser().id
+    this.getAllCart()
     this.router.navigate(['home']);
+  }
+
+  getAllCart() {
+    this.userService.getAllCart(this.userId).subscribe((res) => {
+      console.log(res);
+      
+    })
   }
   handleError(data: any ) {
     this.errorMessage = data.error.message;

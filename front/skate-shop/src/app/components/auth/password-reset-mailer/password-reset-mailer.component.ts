@@ -13,6 +13,7 @@ export class PasswordResetMailerComponent implements OnInit {
   errorMessage : string = null;
   emailSent  = false;
   email : string;
+  waitingForMail : boolean = false
 
   constructor(private authService : AuthService) {
     this.passForm = new FormGroup({
@@ -28,10 +29,11 @@ export class PasswordResetMailerComponent implements OnInit {
   }
 
   sendResetMail() {
+    this.waitingForMail = true
     this.email = this.passForm.value.email
     this.authService.sendMailReset(this.email).subscribe(
       {
-        next : (data) => (this.emailSent = true, this.errorMessage = null ),
+        next : (data) => (this.emailSent = true, this.errorMessage = null, this.waitingForMail = false ),
         error : (e) => this.handleError(e)
       })
   }

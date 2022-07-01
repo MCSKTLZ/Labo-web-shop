@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-import { NavigationEnd, Router } from '@angular/router';
-import { UserService } from 'src/app/_services/user.service';
-import { UrlService } from 'src/app/_helpers/url.service';
-import { filter, Observable } from 'rxjs';
+import {  Router } from '@angular/router';
 import { Location } from '@angular/common'
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -15,8 +14,10 @@ export class NavMenuComponent implements OnInit {
 
   public isConnected: boolean = false;
   public isAdmin: boolean = false;
-  public cart : any;
+  public cartComplete : Observable<any[]>
+  public cart : any[];
   public user : any;
+  public userId : any
 
   constructor(
     private tokenStorage : TokenStorageService, 
@@ -27,16 +28,25 @@ export class NavMenuComponent implements OnInit {
     this.tokenStorage.currentUser.subscribe({
       next : (user) => {
         this.isConnected = this.tokenStorage.isConnected();
+
+        if(this.isConnected) {
+          this.userService.cart$.subscribe({
+            next : (data) => {
+              this.user = user
+              this.userId = user.id
+              this.cart = data.cart.Products.length
+            },
+            error : (e) => console.log(e)
+          })
+        }
         this.isAdmin = this.tokenStorage.isAdmin()
-        this.user = user
       }
     })
-    if(this.isConnected) {
-      this.userService.getAllCart(this.user.id).subscribe((res) => {
-        this.cart = (res.cart.Products.length);
-      })
-    }
-    
+      
+
+      // this.userService.getAllCart(this.user.id).subscribe((res) => {
+      //   this.cart = (res.cart.Products.length);
+      // })
   }
 
   ngOnInit(): void {
@@ -48,6 +58,12 @@ export class NavMenuComponent implements OnInit {
   }
   redirectUserProfile() {
     this.router.navigate(['user-profile/' + this.user.id])
+  }
+
+  getAllCart() {
+    this.userService.getAllCart(this.userId).subscribe((res) => {
+      this.cart = res.cart
+    })
   }
   
 }

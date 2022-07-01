@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import {
   HttpClient,
@@ -16,8 +16,18 @@ export class UserService {
 
   endpoint: string = 'http://localhost:3000';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private cartSubject: BehaviorSubject<any>
+  public cart$: Observable<any> 
 
-  constructor(private http: HttpClient) { }
+  public get cartValue(): any {
+    return this.cartSubject.value;
+  }
+
+  constructor(private http: HttpClient) { 
+    this.cartSubject = new BehaviorSubject<any>(null);
+    this.cart$ = this.cartSubject.asObservable()
+  }
+
   getPublicContent(): Observable<any> {
     return this.http.get(API_URL + 'all', { responseType: 'text' });
   }
@@ -44,7 +54,16 @@ export class UserService {
   }
 
   getAllCart(id: any): Observable<any> {
-    return this.http.get(this.endpoint + "/users/cart/all/" + id)
+    return this.http.get<any>(this.endpoint + "/users/cart/all/" + id).pipe(
+      map(cart => 
+        { 
+          this.cartSubject.next(cart)
+          return cart
+        }))
+  }
+
+  getCartLength() {
+    return this.cartSubject
   }
   addProductToCart(id: any, userId :any) : Observable<any>{ 
     return this.http.get(this.endpoint + "/users/cart/product/" + id + "/" + userId)

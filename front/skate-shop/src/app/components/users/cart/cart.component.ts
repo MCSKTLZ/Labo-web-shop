@@ -8,7 +8,7 @@ import { UserService } from 'src/app/_services/user.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  products : any[]
+  products : any[] 
   subTotal : number
   cart : any
   userId : any
@@ -46,5 +46,9 @@ export class CartComponent implements OnInit {
       this.products = res.cart.Products
       this.cart = res.cart
     })
+  }
+
+  back() {
+    history.back()
   }
 }
