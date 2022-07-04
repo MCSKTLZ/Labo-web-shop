@@ -91,8 +91,12 @@
               aria-labelledby="loginDropdown"
               *ngIf="!isConnected"
             >
-              <li><a class="dropdown-item" href="login">Login</a></li>
-              <li><a class="dropdown-item" href="signup">Sign up</a></li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/login']">Login</a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/signup']">Sign up</a>
+              </li>
               <!-- <li><hr class="dropdown-divider" /></li>
               <li>
                 <a class="dropdown-item" href="#">Something else here</a>
@@ -110,7 +114,7 @@
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item" href="" (click)="logout()">Logout</a>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
               </li>
             </ul>
           </li>

@@ -30,16 +30,19 @@ export class ProductDetailsComponent implements OnInit {
     ) 
     {
     this.isConnected = this.tokenStorage.isConnected()
-    this.userId = this.tokenStorage.currentUserValue.id
+    if(this.isConnected){
+      this.userId = this.tokenStorage.currentUserValue.id
+      this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
+      this.getAllCart()
+    }
 
-    this.getAllCart()
-
+    
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.productService.getProductById(id).subscribe((res) => {
       this.product = res
-      // console.log(this.product);
+      console.log(this.product);
     })
-    this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
+    
     }
 
   ngOnInit(): void {
