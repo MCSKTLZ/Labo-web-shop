@@ -16,6 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   product : any
   user : any
   isConnected : boolean
+  isAdmin : boolean
   userId : any
   productAdded : string = null
   errorMessage : string =  null
@@ -31,6 +32,7 @@ export class ProductDetailsComponent implements OnInit {
     {
     this.isConnected = this.tokenStorage.isConnected()
     if(this.isConnected){
+      this.isAdmin = this.tokenStorage.isAdmin()
       this.userId = this.tokenStorage.currentUserValue.id
       this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
       this.getAllCart()

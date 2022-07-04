@@ -64,7 +64,7 @@
                   <button
                     (click)="addToCart(product.id)"
                     class="btn btn-danger mr-2 px-4"
-                    *ngIf="product.stock > 0"
+                    *ngIf="product.stock > 0 && !isAdmin"
                   >
                     Add to cart
                   </button>

@@ -119,11 +119,15 @@ export class AddProductComponent implements OnInit {
 
   submitProductImage(productId : any) {
     let fd = new FormData();
-    if(this.productImage) {
+    if(this.imageChoosen) {
+      
       fd.append('simple', this.productImage)
       this.adminService.uploadImage(productId, fd).subscribe((res) => {
         console.log(res);
       })
+      
+    } else {
+      console.log('no image choosen');
       
     }
   }

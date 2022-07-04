@@ -55,6 +55,7 @@ export class NavMenuComponent implements OnInit {
 
   logout() {
     this.tokenStorage.signOut()
+    window.location.reload()
   }
   redirectUserProfile() {
     this.router.navigate(['user-profile/' + this.user.id])
