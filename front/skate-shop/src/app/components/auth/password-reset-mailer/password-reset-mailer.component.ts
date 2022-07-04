@@ -34,7 +34,7 @@ export class PasswordResetMailerComponent implements OnInit {
     this.authService.sendMailReset(this.email).subscribe(
       {
         next : (data) => (this.emailSent = true, this.errorMessage = null, this.waitingForMail = false ),
-        error : (e) => this.handleError(e)
+        error : (e) => (this.handleError(e), this.waitingForMail = false)
       })
   }
 
