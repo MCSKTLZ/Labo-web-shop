@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/_services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Router } from '@angular/router';
 import { UrlService } from 'src/app/_helpers/url.service';
 import { UserService } from 'src/app/_services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,9 @@ export class LoginComponent implements OnInit {
       private tokenStorage : TokenStorageService,
       public router: Router,
       private urlService : UrlService,
-      private userService : UserService) {
+      private userService : UserService,
+      private toastr: ToastrService
+      ) {
       this.tokenStorage.currentUser.subscribe({
         next : (user) => {
           this.isLoggedIn = this.tokenStorage.isConnected();
@@ -70,6 +73,7 @@ export class LoginComponent implements OnInit {
     this.role = this.tokenStorage.getUser().role;
     this.userId = this.tokenStorage.getUser().id
     this.getAllCart()
+    this.toastr.success('You are logged in', 'Success')
     this.router.navigate(['home']);
   }
 
@@ -81,7 +85,7 @@ export class LoginComponent implements OnInit {
   }
   handleError(data: any ) {
     this.errorMessage = data.error.message;
-    
+    this.toastr.error(this.errorMessage, 'Error')
     this.isLoginFailed = true;
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-password-reset-mailer',
@@ -15,7 +17,10 @@ export class PasswordResetMailerComponent implements OnInit {
   email : string;
   waitingForMail : boolean = false
 
-  constructor(private authService : AuthService) {
+  constructor(
+    private authService : AuthService,
+    private toastr : ToastrService
+    ) {
     this.passForm = new FormGroup({
       email : new FormControl ('', Validators.compose([
         Validators.required,
@@ -33,13 +38,21 @@ export class PasswordResetMailerComponent implements OnInit {
     this.email = this.passForm.value.email
     this.authService.sendMailReset(this.email).subscribe(
       {
-        next : (data) => (this.emailSent = true, this.errorMessage = null, this.waitingForMail = false ),
-        error : (e) => (this.handleError(e), this.waitingForMail = false)
+        next : (data) => (
+          this.toastr.success(`Email sent to ${this.email}`, 'Success'),
+          this.errorMessage = null,
+          this.waitingForMail = false
+          ),
+        error : (e) => (
+          this.handleError(e),
+          this.waitingForMail = false
+          )
       })
   }
 
   handleError(data: any ) {
     this.errorMessage = data.error;
+    this.toastr.error(this.errorMessage, 'Error')
     this.emailSent = false;
   }
 }

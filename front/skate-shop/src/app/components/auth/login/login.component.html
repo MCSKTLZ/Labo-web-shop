@@ -57,18 +57,12 @@
             >
               Sign in
             </button>
-            <div class="alert alert-danger text-center" *ngIf="errorMessage">
-              {{ errorMessage }}
-            </div>
             <!-- Register -->
             <p>
               Not a member?
               <a href="/signup">Register</a>
             </p>
           </form>
-          <div class="alert alert-success text-center" *ngIf="isLoggedIn">
-            Logged in as {{ role }}.
-          </div>
           <!-- Default form login -->
         </div>
       </div>

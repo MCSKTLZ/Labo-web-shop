@@ -108,13 +108,17 @@
               *ngIf="isConnected"
             >
               <li>
-                <a class="dropdown-item" (click)="redirectUserProfile()"
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['user-profile/' + this.user.id]"
                   >Account</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item" (click)="logout()">Logout</a>
+                <a class="dropdown-item" (click)="logout()" role="button"
+                  >Logout</a
+                >
               </li>
             </ul>
           </li>
