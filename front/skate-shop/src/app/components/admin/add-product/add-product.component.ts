@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/_services/admin.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product',
@@ -26,7 +27,8 @@ export class AddProductComponent implements OnInit {
     public router: Router,
     private productService : ProductService,
     public fb: FormBuilder,
-    private adminService : AdminService
+    private adminService : AdminService,
+    private toastr: ToastrService
   ) { 
 
     this.productService.getAllBrands().subscribe((res) => {
@@ -94,10 +96,16 @@ export class AddProductComponent implements OnInit {
             next : (data) => (this.addSuccess = true, this.addNew = false),
             error : (e) => this.handleError(e)
           }),
-          this.submitProductImage(d.id)
+          this.submitProductImage(d.id),
+          this.showToastr(),
+          this.productForm.reset()
           ),
         error : (e) => this.handleError(e)
       })
+  }
+
+  showToastr() {
+    this.toastr.success('Product successfully added', 'Success')
   }
 
   handleError(data: any ) {

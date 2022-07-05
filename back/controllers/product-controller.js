@@ -1,5 +1,6 @@
 const dbConnector = require("../models/dbc").get();
 const Sequelize = require("sequelize");
+const { ValidationError } = require("sequelize");
 const Op = Sequelize.Op;
 
 exports.createProduct = async (req, res, next) => {
@@ -88,14 +89,22 @@ exports.updateProduct = async (req, res, next) => {
   try {
     const product = await dbConnector.Product.findByPk(req.params.id);
     if (req.body.brandId) {
-      product.update({ BrandId: req.body.brandId });
+      await product.update({ BrandId: req.body.brandId });
     }
-    product.update(req.body);
-    res.status(200).json({
-      message: `Product name ${product.name} updated`,
-    });
+    product
+      .update(req.body)
+      .then(() => {
+        res.status(200).json({
+          message: `Product name ${product.name} updated`,
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          message: err,
+        });
+      });
   } catch (err) {
-    res.json({ message: err.errors });
+    res.json({ message: err });
   }
 };
 

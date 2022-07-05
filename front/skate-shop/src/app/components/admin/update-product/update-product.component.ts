@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/_services/admin.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-product',
@@ -27,7 +28,8 @@ export class UpdateProductComponent implements OnInit {
     public router: Router,
     private productService : ProductService,
     public fb: FormBuilder,
-    private adminService : AdminService
+    private adminService : AdminService,
+    private toastr: ToastrService
   ) { 
     let id = actRoute.snapshot.paramMap.get('id')
     this.productService.getProductById(id).subscribe((res) => {
@@ -120,7 +122,7 @@ export class UpdateProductComponent implements OnInit {
       .subscribe({
         next : (data) => (this.adminService.addCategory(this.product.id, category)
           .subscribe({
-            next : (data) => this.updateSuccess = true,
+            next : (data) => this.toastr.success('Product successfully updated', 'Success'),
             error : (e) => this.handleError(e)
           }), this.submitProductImage(this.product.id)),
         error : (e) => this.handleError(e)
@@ -151,8 +153,9 @@ export class UpdateProductComponent implements OnInit {
     }
   }
 
-  handleError(data: any ) {
-    this.errorMessage = data.error.message;
+  handleError(data: any ) {  
+    this.errorMessage = (data.error.message.errors[0].message)
+    this.toastr.error(this.errorMessage, 'Error')
   }
 
 }

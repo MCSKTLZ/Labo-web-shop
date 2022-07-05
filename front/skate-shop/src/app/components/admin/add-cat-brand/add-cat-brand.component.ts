@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/_services/admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-cat-brand',
@@ -11,12 +12,13 @@ export class AddCatBrandComponent implements OnInit {
 
   addCatForm!: FormGroup;
   addBrandForm!: FormGroup;
-  brandCreated = false;
-  catCreated = false;
   catMessage = '';
   brandMessage = '';
 
-  constructor(private adminService : AdminService) {
+  constructor(
+    private adminService : AdminService,
+    private toastr: ToastrService
+    ) {
 
     this.addCatForm = new FormGroup({
       newCategory : new FormControl('', Validators.compose([
@@ -37,12 +39,13 @@ export class AddCatBrandComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   createCat() {  
     let newCat = { name : this.addCatForm.value.newCategory}
     this.adminService.createCat(newCat).subscribe((res) => {
       this.catMessage = res.message
-      this.catCreated = true ;
       this.addCatForm.patchValue({newCategory : ''})
+      this.toastr.success('Category successfully added', 'Success')
     })
   }
 
@@ -50,8 +53,8 @@ export class AddCatBrandComponent implements OnInit {
     let newBrand = { name : this.addBrandForm.value.newBrand}
     this.adminService.createBrand(newBrand).subscribe((res) => {
       this.brandMessage = res.message
-      this.brandCreated = true;
       this.addBrandForm.patchValue({newBrand : ''})
+      this.toastr.success('Brand successfully added', 'Success')
     })
   }
 

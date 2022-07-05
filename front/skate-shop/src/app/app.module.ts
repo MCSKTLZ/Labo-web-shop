@@ -9,6 +9,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -54,7 +56,9 @@ import { ResetPasswordComponent } from './components/auth/reset-password/reset-p
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    CommonModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
