@@ -76,7 +76,7 @@
       </ul>
       <div class="dropdown">
         <ul class="navbar-nav me-2">
-          <li class="nav-item fs-4">
+          <li class="nav-item fs-4" *ngIf="!isConnected">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -86,11 +86,7 @@
               aria-expanded="false"
               ><i class="bi bi-person-circle"></i
             ></a>
-            <ul
-              class="dropdown-menu"
-              aria-labelledby="loginDropdown"
-              *ngIf="!isConnected"
-            >
+            <ul class="dropdown-menu" aria-labelledby="loginDropdown">
               <li>
                 <a class="dropdown-item" [routerLink]="['/login']">Login</a>
               </li>
@@ -102,11 +98,19 @@
                 <a class="dropdown-item" href="#">Something else here</a>
               </li> -->
             </ul>
-            <ul
-              class="dropdown-menu"
-              aria-labelledby="loginDropdown"
+          </li>
+          <li class="nav-item fs-4" *ngIf="isConnected">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="logedInDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
               *ngIf="isConnected"
-            >
+              ><i class="bi bi-person-circle"></i
+            ></a>
+            <ul class="dropdown-menu" aria-labelledby="logedInDropdown">
               <li>
                 <a
                   class="dropdown-item"

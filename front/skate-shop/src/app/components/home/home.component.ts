@@ -24,7 +24,11 @@ export class HomeComponent implements OnInit {
   cart : any
   userId : any
 
-  constructor(public productService : ProductService, private tokenStorage : TokenStorageService,  private userService : UserService) 
+  constructor(
+    public productService : ProductService,
+    private tokenStorage : TokenStorageService,  
+    private userService : UserService
+    ) 
       { 
         this.getAllProducts()
 

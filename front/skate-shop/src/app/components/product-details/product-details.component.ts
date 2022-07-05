@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ProductService } from 'src/app/_services/product.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { UserService } from 'src/app/_services/user.service';
-import { UrlService} from 'src/app/_helpers/url.service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -27,23 +27,24 @@ export class ProductDetailsComponent implements OnInit {
     public router: Router,
     private productService : ProductService,
     public userService : UserService,
-    private tokenStorage : TokenStorageService
+    private tokenStorage : TokenStorageService,
+    private toastr : ToastrService
     ) 
     {
-    this.isConnected = this.tokenStorage.isConnected()
-    if(this.isConnected){
-      this.isAdmin = this.tokenStorage.isAdmin()
-      this.userId = this.tokenStorage.currentUserValue.id
-      this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
-      this.getAllCart()
-    }
+      this.isConnected = this.tokenStorage.isConnected()
+      if(this.isConnected){
+        this.isAdmin = this.tokenStorage.isAdmin()
+        this.userId = this.tokenStorage.currentUserValue.id
+        this.user = JSON.parse(window.sessionStorage.getItem("auth-user"))
+        this.getAllCart()
+      }
 
-    
-    let id = this.actRoute.snapshot.paramMap.get('id');
-    this.productService.getProductById(id).subscribe((res) => {
-      this.product = res
-      console.log(this.product);
-    })
+      
+      let id = this.actRoute.snapshot.paramMap.get('id');
+      this.productService.getProductById(id).subscribe((res) => {
+        this.product = res
+        console.log(this.product);
+      })
     
     }
 
@@ -57,12 +58,13 @@ export class ProductDetailsComponent implements OnInit {
       this.userService.addProductToCart(id, this.user.id).subscribe(
         {
           next : (data) => {            
-            this.productAdded = data.message
+            this.toastr.success(data.message, 'Success')
             this.getAllCart()
           },
           error : (err) => {
             this.productAdded = null
             this.errorMessage = err.error.message
+            this.toastr.error(this.errorMessage, 'Error')
           },
         }
       )
@@ -72,7 +74,6 @@ export class ProductDetailsComponent implements OnInit {
   getAllCart() {
     this.userService.getAllCart(this.userId).subscribe((res) => {
       console.log("cart loaded");
-      
     })
   }
 

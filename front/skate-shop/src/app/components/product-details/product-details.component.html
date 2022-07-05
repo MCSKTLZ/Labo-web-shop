@@ -68,18 +68,6 @@
                   >
                     Add to cart
                   </button>
-                  <div
-                    class="alert alert-success text-center mt-3"
-                    *ngIf="productAdded"
-                  >
-                    {{ productAdded }}
-                  </div>
-                  <div
-                    class="alert alert-warning text-center mt-3"
-                    *ngIf="errorMessage"
-                  >
-                    {{ errorMessage }}
-                  </div>
                   <button
                     class="btn btn-danger mr-2 px-4 disabled"
                     *ngIf="product.stock <= 0"
